@@ -1,0 +1,62 @@
+/// Meses de antigüedad 0–72 con su banda y etapa de ciclo de vida.
+table dim_antiguedad
+	lineageTag: 892dc2cc-afc3-528f-b8cc-a519ac3d37ac
+
+	column antiguedad_meses
+		dataType: int64
+		formatString: 0
+		lineageTag: 7b303348-b1af-58f1-9441-78791fe27c3e
+		summarizeBy: none
+		sourceColumn: antiguedad_meses
+
+		annotation SummarizationSetBy = User
+
+	column banda_antiguedad
+		dataType: string
+		lineageTag: da10fc88-d812-5784-b0ef-038ca90d0cd4
+		summarizeBy: none
+		sourceColumn: banda_antiguedad
+		sortByColumn: banda_orden
+
+		annotation SummarizationSetBy = User
+
+	column banda_orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 77ece6b1-167f-508f-9d21-03a69be1ac5c
+		summarizeBy: none
+		sourceColumn: banda_orden
+
+		annotation SummarizationSetBy = User
+
+	column etapa_ciclo_vida
+		dataType: string
+		lineageTag: 63c8dd16-b49a-5859-93bb-c1ea2f31c796
+		summarizeBy: none
+		sourceColumn: etapa_ciclo_vida
+		sortByColumn: etapa_orden
+
+		annotation SummarizationSetBy = User
+
+	column etapa_orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 412ba896-e250-5a46-b50a-e80be07ffe2e
+		summarizeBy: none
+		sourceColumn: etapa_orden
+
+		annotation SummarizationSetBy = User
+
+	partition dim_antiguedad = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "dim_antiguedad.csv"), [Delimiter = ",", Columns = 5, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"antiguedad_meses", Int64.Type}, {"banda_antiguedad", type text}, {"banda_orden", Int64.Type}, {"etapa_ciclo_vida", type text}, {"etapa_orden", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

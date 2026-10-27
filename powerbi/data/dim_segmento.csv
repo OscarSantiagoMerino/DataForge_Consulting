@@ -1,0 +1,27 @@
+segmento_id,segmento,contrato,servicio_internet,etapa_ciclo_vida,prioridad,palanca_dominante,prioridad_orden,palanca,responsable
+S01,Mes a mes · Fibra óptica · En desarrollo (13–48 m),Mes a mes,Fibra óptica,En desarrollo (13–48 m),P1 · Intervenir ahora,L2,1,Bundle de protección,Producto / Marketing de servicios
+S02,Mes a mes · Fibra óptica · Nuevo (0–12 m),Mes a mes,Fibra óptica,Nuevo (0–12 m),P1 · Intervenir ahora,L4,1,Onboarding temprano,Customer Success
+S03,Mes a mes · DSL · Nuevo (0–12 m),Mes a mes,DSL,Nuevo (0–12 m),P1 · Intervenir ahora,L4,1,Onboarding temprano,Customer Success
+S04,Mes a mes · Fibra óptica · Consolidado (49–72 m),Mes a mes,Fibra óptica,Consolidado (49–72 m),P2 · Intervenir focalizado,L2,2,Bundle de protección,Producto / Marketing de servicios
+S05,Un año · Fibra óptica · Consolidado (49–72 m),Un año,Fibra óptica,Consolidado (49–72 m),P2 · Intervenir focalizado,L2,2,Bundle de protección,Producto / Marketing de servicios
+S06,Mes a mes · DSL · En desarrollo (13–48 m),Mes a mes,DSL,En desarrollo (13–48 m),P2 · Intervenir focalizado,L1,2,Migración a contrato anual,Comercial de retención
+S07,Un año · Fibra óptica · En desarrollo (13–48 m),Un año,Fibra óptica,En desarrollo (13–48 m),P3 · Monitorear,L2,3,Bundle de protección,Producto / Marketing de servicios
+S08,Dos años · Fibra óptica · Consolidado (49–72 m),Dos años,Fibra óptica,Consolidado (49–72 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S09,Un año · DSL · En desarrollo (13–48 m),Un año,DSL,En desarrollo (13–48 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S10,Mes a mes · Sin internet · Nuevo (0–12 m),Mes a mes,Sin internet,Nuevo (0–12 m),P3 · Monitorear,L4,3,Onboarding temprano,Customer Success
+S11,Dos años · DSL · Consolidado (49–72 m),Dos años,DSL,Consolidado (49–72 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S12,Un año · DSL · Consolidado (49–72 m),Un año,DSL,Consolidado (49–72 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S13,Mes a mes · DSL · Consolidado (49–72 m),Mes a mes,DSL,Consolidado (49–72 m),P3 · Monitorear,L1,3,Migración a contrato anual,Comercial de retención
+S14,Un año · DSL · Nuevo (0–12 m),Un año,DSL,Nuevo (0–12 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S15,Dos años · Fibra óptica · En desarrollo (13–48 m),Dos años,Fibra óptica,En desarrollo (13–48 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S16,Mes a mes · Sin internet · En desarrollo (13–48 m),Mes a mes,Sin internet,En desarrollo (13–48 m),P3 · Monitorear,L1,3,Migración a contrato anual,Comercial de retención
+S17,Un año · Fibra óptica · Nuevo (0–12 m),Un año,Fibra óptica,Nuevo (0–12 m),P3 · Monitorear,L2,3,Bundle de protección,Producto / Marketing de servicios
+S18,Dos años · DSL · En desarrollo (13–48 m),Dos años,DSL,En desarrollo (13–48 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S19,Un año · Sin internet · En desarrollo (13–48 m),Un año,Sin internet,En desarrollo (13–48 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S20,Un año · Sin internet · Nuevo (0–12 m),Un año,Sin internet,Nuevo (0–12 m),P3 · Monitorear,L4,3,Onboarding temprano,Customer Success
+S21,Dos años · DSL · Nuevo (0–12 m),Dos años,DSL,Nuevo (0–12 m),P3 · Monitorear,L4,3,Onboarding temprano,Customer Success
+S22,Dos años · Sin internet · Consolidado (49–72 m),Dos años,Sin internet,Consolidado (49–72 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S23,Dos años · Sin internet · En desarrollo (13–48 m),Dos años,Sin internet,En desarrollo (13–48 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S24,Un año · Sin internet · Consolidado (49–72 m),Un año,Sin internet,Consolidado (49–72 m),P3 · Monitorear,L3,3,Pago automático,Facturación y cobranzas
+S25,Dos años · Sin internet · Nuevo (0–12 m),Dos años,Sin internet,Nuevo (0–12 m),P3 · Monitorear,L4,3,Onboarding temprano,Customer Success
+S26,Mes a mes · Sin internet · Consolidado (49–72 m),Mes a mes,Sin internet,Consolidado (49–72 m),P3 · Monitorear,L1,3,Migración a contrato anual,Comercial de retención

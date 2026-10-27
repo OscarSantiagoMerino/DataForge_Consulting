@@ -1,0 +1,52 @@
+/// Tipo de contrato.
+table dim_contrato
+	lineageTag: d5ccfba9-64b3-59b8-b283-7bd637feffae
+
+	column contrato
+		dataType: string
+		lineageTag: 9a0151ef-9ab2-53de-917e-b99311c8fa90
+		summarizeBy: none
+		sourceColumn: contrato
+		sortByColumn: contrato_orden
+
+		annotation SummarizationSetBy = User
+
+	column contrato_orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 55660fa3-86b2-5912-9b28-35c9dd310626
+		summarizeBy: none
+		sourceColumn: contrato_orden
+
+		annotation SummarizationSetBy = User
+
+	column plazo_meses
+		dataType: int64
+		formatString: 0
+		lineageTag: 320d6a1a-61f4-5570-a5f0-3d4e9f4192e3
+		summarizeBy: none
+		sourceColumn: plazo_meses
+
+		annotation SummarizationSetBy = User
+
+	column es_plazo
+		dataType: int64
+		formatString: 0
+		lineageTag: 33ae034d-052f-5295-9fd2-811ac8f92ba7
+		summarizeBy: none
+		sourceColumn: es_plazo
+
+		annotation SummarizationSetBy = User
+
+	partition dim_contrato = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "dim_contrato.csv"), [Delimiter = ",", Columns = 4, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"contrato", type text}, {"contrato_orden", Int64.Type}, {"plazo_meses", Int64.Type}, {"es_plazo", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

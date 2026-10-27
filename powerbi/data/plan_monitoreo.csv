@@ -1,0 +1,11 @@
+Métrica,Valor en el corte,Meta,Verde,Amarillo,Rojo,Interpretación,Acción sugerida,Responsable,Frecuencia,orden
+% MRR retenido (North Star),69.5 %,≥ 75 %,≥ 75 %,69.5 % – 75 %,< 69.5 %,Proporción del ingreso recurrente que se conserva,Rojo: el Comité revisa presupuesto y palancas. Amarillo: mantener el piloto y reforzar P1.,Gerencia de Retención,Mensual,1
+Tasa de churn,26.5 %,≤ 22 %,≤ 22 %,22 % – 26.5 %,> 26.5 %,Clientes perdidos en el período,Rojo: revisar qué segmento empeoró en la vista diagnóstica.,Gerencia de Retención,Mensual,2
+Churn temprano (0–6 m),52.9 %,≤ 45 %,≤ 45 %,45 % – 52.9 %,> 52.9 %,Calidad de la experiencia inicial,Rojo: auditar el onboarding y ampliar la cobertura de L4.,Customer Success,Semanal,3
+% contratos a plazo,45.0 %,≥ 50 %,≥ 50 %,45.0 % – 50 %,< 45.0 %,Estabilidad de la base,Rojo: revisar la oferta de migración (L1) solo en riesgo alto.,Dirección Comercial,Mensual,4
+% pago automático,43.5 %,≥ 50 %,≥ 50 %,43.5 % – 50 %,< 43.5 %,Fricción de pago,Rojo: reforzar el incentivo L3 y la comunicación en factura.,Facturación,Mensual,5
+Adopción de protección,53.7 %,≥ 58.7 %,≥ 58.7 %,53.7 % – 58.7 %,< 53.7 %,Valor percibido del servicio de internet,Rojo: revisar la oferta del bundle L2 en fibra.,Producto / Marketing,Mensual,6
+MRR activo en riesgo alto,"USD 64,085","≤ USD 54,472","≤ USD 54,472","USD 54,472 – USD 70,493","> USD 70,493",Valor en juego en la lista de trabajo,Rojo: priorizar contactos P1 en la semana y ampliar capacidad.,Gerencia de Retención,Semanal,7
+ARPU (balance),USD 64.76,≥ USD 62.82,≥ USD 64.76,USD 62.82 – USD 64.76,< USD 62.82,Que la retención no se compre con descuentos,Rojo: suspender o limitar L1 (descuento).,CFO,Mensual,8
+ROI del programa (balance),+179% (estimado base),≥ 0 %,≥ 0 %,−20 % – 0 %,< −20 %,Retorno observado del piloto,Verde: escalar. Amarillo: ajustar palancas. Rojo: detener y rediseñar.,CFO / Gerencia de Retención,Trimestral,9
+Uplift del piloto (churn 90 días),Sin medir,Reducción ≥ umbral de equilibrio,Significativo y ≥ equilibrio,Positivo no significativo,Nulo o negativo,Efecto causal de las palancas,Verde: escalar a toda la población elegible. Rojo: no escalar.,Analítica (DataForge),"A 30, 60 y 90 días",10

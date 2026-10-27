@@ -1,0 +1,27 @@
+﻿segmento_id,contrato,servicio_internet,etapa_ciclo_vida,segmento,clientes,churners,mrr_perdido,clientes_activos,mrr_activo,mrr_riesgo_esperado,activos_riesgo_alto,palanca_dominante,tasa_churn,participacion_riesgo,prioridad
+S01,Mes a mes,Fibra óptica,En desarrollo (13–48 m),Mes a mes · Fibra óptica · En desarrollo (13–48 m),946,441,39808.95,505,44931.6,19592.397825760625,303,L2,0.46617336152219874,0.28771532722725024,P1 · Intervenir ahora
+S02,Mes a mes,Fibra óptica,Nuevo (0–12 m),Mes a mes · Fibra óptica · Nuevo (0–12 m),916,643,53178.3,273,22004.85,14567.814765727935,263,L4,0.7019650655021834,0.2139290774708767,P1 · Intervenir ahora
+S03,Mes a mes,DSL,Nuevo (0–12 m),Mes a mes · DSL · Nuevo (0–12 m),690,293,13351.9,397,19687.8,7860.639794530791,196,L4,0.4246376811594203,0.115433882611618,P1 · Intervenir ahora
+S04,Mes a mes,Fibra óptica,Consolidado (49–72 m),Mes a mes · Fibra óptica · Consolidado (49–72 m),266,78,7494.75,188,17762.65,5698.6056005565415,42,L2,0.2932330827067669,0.08368430396750143,P2 · Intervenir focalizado
+S05,Un año,Fibra óptica,Consolidado (49–72 m),Un año · Fibra óptica · Consolidado (49–72 m),355,67,6926.2,288,28747.3,4952.862955444985,0,L2,0.18873239436619718,0.0727330364874447,P2 · Intervenir focalizado
+S06,Mes a mes,DSL,En desarrollo (13–48 m),Mes a mes · DSL · En desarrollo (13–48 m),459,91,4521.15,368,19931.95,3862.1704505838916,7,L1,0.19825708061002179,0.05671616332412958,P2 · Intervenir focalizado
+S07,Un año,Fibra óptica,En desarrollo (13–48 m),Un año · Fibra óptica · En desarrollo (13–48 m),177,35,3444.6,142,13458.75,2931.25859780159,4,L2,0.1977401129943503,0.0430456769076673,P3 · Monitorear
+S08,Dos años,Fibra óptica,Consolidado (49–72 m),Dos años · Fibra óptica · Consolidado (49–72 m),393,28,2965.55,365,38231.6,2279.9603483330243,0,L3,0.07124681933842239,0.03348133003012482,P3 · Monitorear
+S09,Un año,DSL,En desarrollo (13–48 m),Un año · DSL · En desarrollo (13–48 m),320,33,2112.25,287,17396.65,1517.928518423209,0,L3,0.103125,0.02229085506887178,P3 · Monitorear
+S10,Mes a mes,Sin internet,Nuevo (0–12 m),Mes a mes · Sin internet · Nuevo (0–12 m),388,88,1771.25,300,6092.4,1234.7029694859839,0,L4,0.2268041237113402,0.01813167393054025,P3 · Monitorear
+S11,Dos años,DSL,Consolidado (49–72 m),Dos años · DSL · Consolidado (49–72 m),506,11,751.35,495,35869.65,736.4230528183363,0,L3,0.021739130434782608,0.010814408808131299,P3 · Monitorear
+S12,Un año,DSL,Consolidado (49–72 m),Un año · DSL · Consolidado (49–72 m),208,13,871.05,195,12372.95,683.2706908463206,0,L3,0.0625,0.010033863754193469,P3 · Monitorear
+S13,Mes a mes,DSL,Consolidado (49–72 m),Mes a mes · DSL · Consolidado (49–72 m),74,10,494.2,64,3431.45,461.91349983590646,0,L1,0.13513513513513514,0.006783222499761218,P3 · Monitorear
+S14,Un año,DSL,Nuevo (0–12 m),Un año · DSL · Nuevo (0–12 m),42,7,372.95,35,1870.3,310.2505919773214,1,L3,0.16666666666666666,0.004556045226676469,P3 · Monitorear
+S15,Dos años,Fibra óptica,En desarrollo (13–48 m),Dos años · Fibra óptica · En desarrollo (13–48 m),36,3,280.55,33,3383.45,279.7568163347384,0,L3,0.08333333333333333,0.004108242629188149,P3 · Monitorear
+S16,Mes a mes,Sin internet,En desarrollo (13–48 m),Mes a mes · Sin internet · En desarrollo (13–48 m),134,10,207.2,124,2584.35,208.6818703218613,0,L1,0.07462686567164178,0.0030645035457122763,P3 · Monitorear
+S17,Un año,Fibra óptica,Nuevo (0–12 m),Un año · Fibra óptica · Nuevo (0–12 m),7,2,201.15,5,464.15,201.1349583344732,4,L2,0.2857142857142857,0.0029536767714033315,P3 · Monitorear
+S18,Dos años,DSL,En desarrollo (13–48 m),Dos años · DSL · En desarrollo (13–48 m),104,1,54.35,103,6528.35,183.7883880660996,0,L3,0.009615384615384616,0.002698941532489723,P3 · Monitorear
+S19,Un año,Sin internet,En desarrollo (13–48 m),Un año · Sin internet · En desarrollo (13–48 m),218,3,65.85,215,4456.3,151.43686955431352,0,L3,0.013761467889908258,0.0022238578894514765,P3 · Monitorear
+S20,Un año,Sin internet,Nuevo (0–12 m),Un año · Sin internet · Nuevo (0–12 m),75,4,78.7,71,1451.65,119.63052244830195,0,L4,0.05333333333333334,0.0017567801153631306,P3 · Monitorear
+S21,Dos años,DSL,Nuevo (0–12 m),Dos años · DSL · Nuevo (0–12 m),18,0,0.0,18,1047.05,72.63595771894988,0,L4,0.0,0.0010666626172777323,P3 · Monitorear
+S22,Dos años,Sin internet,Consolidado (49–72 m),Dos años · Sin internet · Consolidado (49–72 m),364,3,64.25,361,8015.55,66.16142824802075,0,L3,0.008241758241758242,0.0009715838330504356,P3 · Monitorear
+S23,Dos años,Sin internet,En desarrollo (13–48 m),Dos años · Sin internet · En desarrollo (13–48 m),224,2,49.25,222,4707.6,57.36900176430281,0,L3,0.008928571428571428,0.0008424666170066542,P3 · Monitorear
+S24,Un año,Sin internet,Consolidado (49–72 m),Un año · Sin internet · Consolidado (49–72 m),71,2,45.7,69,1480.1,33.53572332467441,0,L3,0.028169014084507043,0.0004924737490515221,P3 · Monitorear
+S25,Dos años,Sin internet,Nuevo (0–12 m),Dos años · Sin internet · Nuevo (0–12 m),50,0,0.0,50,1057.3,31.53571870673123,0,L4,0.0,0.0004631035827132836,P3 · Monitorear
+S26,Mes a mes,Sin internet,Consolidado (49–72 m),Mes a mes · Sin internet · Consolidado (49–72 m),2,1,19.4,1,20.0,0.6019593361576315,0,L1,0.5,8.839802505049814e-06,P3 · Monitorear

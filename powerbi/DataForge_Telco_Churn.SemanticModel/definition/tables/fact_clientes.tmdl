@@ -1,0 +1,326 @@
+/// Tabla de hechos: una fila por cliente en el corte (granularidad cliente-corte).
+table fact_clientes
+	lineageTag: 30d4a88f-cfef-52c3-bacc-03e81c70c59d
+
+	column customer_id
+		dataType: string
+		lineageTag: 6e9141b0-e362-5c92-bee4-2834ae4432c2
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = User
+
+	column segmento_id
+		dataType: string
+		isHidden
+		lineageTag: e79439e0-01a5-5879-978e-31b04602fa9a
+		summarizeBy: none
+		sourceColumn: segmento_id
+
+		annotation SummarizationSetBy = User
+
+	column antiguedad_meses
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 53095daa-b2f2-5af2-8b1a-d51c20706a8d
+		summarizeBy: none
+		sourceColumn: antiguedad_meses
+
+		annotation SummarizationSetBy = User
+
+	column contrato
+		dataType: string
+		isHidden
+		lineageTag: e347da02-bed5-58f0-a18f-caf39a2b6d53
+		summarizeBy: none
+		sourceColumn: contrato
+
+		annotation SummarizationSetBy = User
+
+	column servicio_internet
+		dataType: string
+		isHidden
+		lineageTag: 3609954f-d86b-59c5-b345-ec60d4a0d667
+		summarizeBy: none
+		sourceColumn: servicio_internet
+
+		annotation SummarizationSetBy = User
+
+	column metodo_pago
+		dataType: string
+		isHidden
+		lineageTag: 5b07a0a5-bcef-5729-b831-4ea77215ff4d
+		summarizeBy: none
+		sourceColumn: metodo_pago
+
+		annotation SummarizationSetBy = User
+
+	column riesgo
+		dataType: string
+		isHidden
+		lineageTag: bc43ba0b-8133-5d7e-a2eb-f11787491c9f
+		summarizeBy: none
+		sourceColumn: riesgo
+
+		annotation SummarizationSetBy = User
+
+	column palanca_id
+		dataType: string
+		isHidden
+		lineageTag: 87569e88-7852-558e-a24d-5cfab2cedfa5
+		summarizeBy: none
+		sourceColumn: palanca_id
+
+		annotation SummarizationSetBy = User
+
+	column genero
+		dataType: string
+		lineageTag: 97baaaf4-893b-5feb-8143-070225e5a876
+		summarizeBy: none
+		sourceColumn: genero
+
+		annotation SummarizationSetBy = User
+
+	column adulto_mayor
+		dataType: string
+		lineageTag: b433af00-a036-57fd-bd5c-61d70cfa267a
+		summarizeBy: none
+		sourceColumn: adulto_mayor
+
+		annotation SummarizationSetBy = User
+
+	column pareja
+		dataType: string
+		lineageTag: 4a5d2bff-7187-5088-88cc-fd5ed8e147f0
+		summarizeBy: none
+		sourceColumn: pareja
+
+		annotation SummarizationSetBy = User
+
+	column dependientes
+		dataType: string
+		lineageTag: 222c8b29-a406-5a77-8f84-c8a00e909a69
+		summarizeBy: none
+		sourceColumn: dependientes
+
+		annotation SummarizationSetBy = User
+
+	column facturacion_electronica
+		dataType: string
+		lineageTag: 9e6b65b0-506b-5ae6-8f34-563e4437192a
+		summarizeBy: none
+		sourceColumn: facturacion_electronica
+
+		annotation SummarizationSetBy = User
+
+	column telefonia
+		dataType: string
+		lineageTag: 3f283d2e-0a2f-568b-ad62-1a2cb082cee1
+		summarizeBy: none
+		sourceColumn: telefonia
+
+		annotation SummarizationSetBy = User
+
+	column lineas_multiples
+		dataType: string
+		lineageTag: de35d750-52c2-5726-a657-745938f884e4
+		summarizeBy: none
+		sourceColumn: lineas_multiples
+
+		annotation SummarizationSetBy = User
+
+	column seguridad_online
+		dataType: string
+		lineageTag: 22d8abda-f369-567b-af98-99b90db9e235
+		summarizeBy: none
+		sourceColumn: seguridad_online
+
+		annotation SummarizationSetBy = User
+
+	column backup_online
+		dataType: string
+		lineageTag: fb3085f5-0cfd-5996-8cad-fb602de2bb70
+		summarizeBy: none
+		sourceColumn: backup_online
+
+		annotation SummarizationSetBy = User
+
+	column proteccion_equipo
+		dataType: string
+		lineageTag: 6ec48fd6-07a7-52ad-8bb9-4f7c087b477c
+		summarizeBy: none
+		sourceColumn: proteccion_equipo
+
+		annotation SummarizationSetBy = User
+
+	column soporte_tecnico
+		dataType: string
+		lineageTag: edcca405-23a4-52c5-a0d3-8d8d685a2f2e
+		summarizeBy: none
+		sourceColumn: soporte_tecnico
+
+		annotation SummarizationSetBy = User
+
+	column streaming_tv
+		dataType: string
+		lineageTag: f64ba735-f3ba-5ce0-b704-8291a340a091
+		summarizeBy: none
+		sourceColumn: streaming_tv
+
+		annotation SummarizationSetBy = User
+
+	column streaming_peliculas
+		dataType: string
+		lineageTag: 445b9459-0d06-5b45-9713-88527124c8b7
+		summarizeBy: none
+		sourceColumn: streaming_peliculas
+
+		annotation SummarizationSetBy = User
+
+	column n_servicios_valor
+		dataType: int64
+		formatString: 0
+		lineageTag: fb1134b5-f3f9-5b43-90cb-d62f39667b7e
+		summarizeBy: none
+		sourceColumn: n_servicios_valor
+
+		annotation SummarizationSetBy = User
+
+	column tiene_proteccion
+		dataType: int64
+		formatString: 0
+		lineageTag: 9353394c-b4aa-5163-91ea-bb328ae3d632
+		summarizeBy: none
+		sourceColumn: tiene_proteccion
+
+		annotation SummarizationSetBy = User
+
+	column proteccion_estado
+		dataType: string
+		lineageTag: 6ef6a0b3-f4a0-5854-83fa-91419c2a3f43
+		summarizeBy: none
+		sourceColumn: proteccion_estado
+
+		annotation SummarizationSetBy = User
+
+	column tiene_internet
+		dataType: int64
+		formatString: 0
+		lineageTag: 621455fc-4d6f-515e-a89b-56ff90e4b620
+		summarizeBy: none
+		sourceColumn: tiene_internet
+
+		annotation SummarizationSetBy = User
+
+	column pago_automatico
+		dataType: int64
+		formatString: 0
+		lineageTag: d7ae43b2-e296-59f7-a6a7-55f63170f340
+		summarizeBy: none
+		sourceColumn: pago_automatico
+
+		annotation SummarizationSetBy = User
+
+	column contrato_plazo
+		dataType: int64
+		formatString: 0
+		lineageTag: b3c114e8-5155-5976-b8cf-1be98f2e936a
+		summarizeBy: none
+		sourceColumn: contrato_plazo
+
+		annotation SummarizationSetBy = User
+
+	column cargo_mensual
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: 5788acad-cd19-5d7d-a9a8-8b33f698137b
+		summarizeBy: none
+		sourceColumn: cargo_mensual
+
+		annotation SummarizationSetBy = User
+
+	column cargo_total
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: 7372636c-7e9b-5f1d-a034-1c36469018a3
+		summarizeBy: none
+		sourceColumn: cargo_total
+
+		annotation SummarizationSetBy = User
+
+	column cargo_total_imputado
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 9c72df7f-33ea-5a40-b1c3-02d5bca62ff0
+		summarizeBy: none
+		sourceColumn: cargo_total_imputado
+
+		annotation SummarizationSetBy = User
+
+	column churn
+		dataType: int64
+		formatString: 0
+		lineageTag: 69d11cd3-d875-566d-afdd-31d6e5e67952
+		summarizeBy: none
+		sourceColumn: churn
+
+		annotation SummarizationSetBy = User
+
+	column estado_cliente
+		dataType: string
+		lineageTag: ce34b9c1-e871-550a-8a44-e3346b920b30
+		summarizeBy: none
+		sourceColumn: estado_cliente
+
+		annotation SummarizationSetBy = User
+
+	column mrr_perdido
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: eed778f6-9ed5-507e-84d9-0753a8d08196
+		summarizeBy: none
+		sourceColumn: mrr_perdido
+
+		annotation SummarizationSetBy = User
+
+	column prob_churn
+		dataType: double
+		formatString: 0.0%
+		lineageTag: c24fdadc-3745-5af8-b2f5-619381f24309
+		summarizeBy: none
+		sourceColumn: prob_churn
+
+		annotation SummarizationSetBy = User
+
+	column mrr_riesgo_esperado
+		dataType: double
+		formatString: \$#,0.00
+		lineageTag: ce453d4a-c819-5859-882b-9088b42c83c2
+		summarizeBy: none
+		sourceColumn: mrr_riesgo_esperado
+
+		annotation SummarizationSetBy = User
+
+	column registro_valido
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 23c38277-c049-557a-9ffa-cfebe99437d1
+		summarizeBy: none
+		sourceColumn: registro_valido
+
+		annotation SummarizationSetBy = User
+
+	partition fact_clientes = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "fact_clientes.csv"), [Delimiter = ",", Columns = 36, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"customer_id", type text}, {"segmento_id", type text}, {"antiguedad_meses", Int64.Type}, {"contrato", type text}, {"servicio_internet", type text}, {"metodo_pago", type text}, {"riesgo", type text}, {"palanca_id", type text}, {"genero", type text}, {"adulto_mayor", type text}, {"pareja", type text}, {"dependientes", type text}, {"facturacion_electronica", type text}, {"telefonia", type text}, {"lineas_multiples", type text}, {"seguridad_online", type text}, {"backup_online", type text}, {"proteccion_equipo", type text}, {"soporte_tecnico", type text}, {"streaming_tv", type text}, {"streaming_peliculas", type text}, {"n_servicios_valor", Int64.Type}, {"tiene_proteccion", Int64.Type}, {"proteccion_estado", type text}, {"tiene_internet", Int64.Type}, {"pago_automatico", Int64.Type}, {"contrato_plazo", Int64.Type}, {"cargo_mensual", type number}, {"cargo_total", type number}, {"cargo_total_imputado", Int64.Type}, {"churn", Int64.Type}, {"estado_cliente", type text}, {"mrr_perdido", type number}, {"prob_churn", type number}, {"mrr_riesgo_esperado", type number}, {"registro_valido", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

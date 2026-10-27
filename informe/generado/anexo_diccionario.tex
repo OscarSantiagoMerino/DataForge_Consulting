@@ -1,0 +1,287 @@
+\subsection*{A.1 \% MRR retenido (North Star)}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Tasa / North Star Metric \\
+\textbf{Objetivo asociado} & Proteger el ingreso recurrente \\
+\textbf{Decisión que soporta} & Cuánto presupuesto asignar a retención y si el programa funciona \\
+\textbf{Definición de negocio} & Proporción del ingreso recurrente mensual que se conserva al cierre del período \\
+\textbf{Fórmula} & 1 − Σ cargo\_mensual[churn = 1] / Σ cargo\_mensual \\
+\textbf{Numerador} & MRR de clientes que abandonan en el período \\
+\textbf{Denominador} & MRR de todos los clientes al inicio del período \\
+\textbf{Unidad} & \% \\
+\textbf{Ventana temporal} & Período de corte (mensual a futuro) \\
+\textbf{Filtros de inclusión} & registro\_valido = 1 \\
+\textbf{Exclusiones} & Ninguna en el corte; a futuro, cuentas internas y de prueba \\
+\textbf{Dimensiones de segmentación} & Contrato, servicio de internet, método de pago, antigüedad, riesgo, palanca \\
+\textbf{Meta o umbral} & ≥ 75 \% (verde); 69.5–75 \% (amarillo); < 69.5 \% (rojo) \\
+\textbf{Dirección deseada} & Subir \\
+\textbf{Métricas de balance} & ARPU, costo de retención, ROI del programa \\
+\textbf{Dueño} & Gerencia de Retención \\
+\textbf{Riesgos de interpretación} & Puede subir por alzas de precio a clientes que se quedan; con un solo corte no hay tendencia; la ventana del churn es ambigua \\
+\textbf{Acción asociada} & Si cae al rojo, el Comité revisa el presupuesto y las palancas del mes \\
+\textbf{Medida DAX} & [\% MRR Retenido] \\
+\textbf{Valor en el corte} & 69.5 \% \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
+
+\subsection*{A.2 Tasa de churn de clientes}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Tasa \\
+\textbf{Objetivo asociado} & Retener clientes \\
+\textbf{Decisión que soporta} & Qué segmentos intervenir \\
+\textbf{Definición de negocio} & Porcentaje de clientes que abandonan en el período \\
+\textbf{Fórmula} & DISTINCTCOUNT(customer\_id)[churn = 1] / DISTINCTCOUNT(customer\_id) \\
+\textbf{Numerador} & Clientes únicos con churn = 1 \\
+\textbf{Denominador} & Clientes únicos en el corte \\
+\textbf{Unidad} & \% \\
+\textbf{Ventana temporal} & Período de corte \\
+\textbf{Filtros de inclusión} & registro\_valido = 1 \\
+\textbf{Exclusiones} & Ninguna \\
+\textbf{Dimensiones de segmentación} & Contrato, internet, pago, antigüedad, protección, demografía \\
+\textbf{Meta o umbral} & ≤ 22 \% (verde); 22–26.5 \% (amarillo); > 26.5 \% (rojo) \\
+\textbf{Dirección deseada} & Bajar \\
+\textbf{Métricas de balance} & \% MRR retenido (pondera valor), ARPU \\
+\textbf{Dueño} & Gerencia de Retención \\
+\textbf{Riesgos de interpretación} & No pondera el valor del cliente; el corte sobrerrepresenta el churn (no anualizar); promediar tasas de segmentos sin ponderar la sesga \\
+\textbf{Acción asociada} & Si un segmento supera el 40 \%, entra a la priorización P1/P2 \\
+\textbf{Medida DAX} & [Tasa Churn] \\
+\textbf{Valor en el corte} & 26.5 \% \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
+
+\subsection*{A.3 MRR perdido por churn}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Volumen (USD) \\
+\textbf{Objetivo asociado} & Proteger el ingreso recurrente \\
+\textbf{Decisión que soporta} & Tamaño del problema y del presupuesto de retención \\
+\textbf{Definición de negocio} & Ingreso mensual recurrente que se va con los clientes que abandonan \\
+\textbf{Fórmula} & Σ cargo\_mensual × churn \\
+\textbf{Numerador} & — \\
+\textbf{Denominador} & — (volumen) \\
+\textbf{Unidad} & USD por mes \\
+\textbf{Ventana temporal} & Período de corte \\
+\textbf{Filtros de inclusión} & churn = 1 \\
+\textbf{Exclusiones} & Ninguna \\
+\textbf{Dimensiones de segmentación} & Contrato × internet (contribución), antigüedad, pago \\
+\textbf{Meta o umbral} & ≤ 25 \% del MRR total \\
+\textbf{Dirección deseada} & Bajar \\
+\textbf{Métricas de balance} & Clientes salvados, costo del programa \\
+\textbf{Dueño} & CFO / Gerencia de Retención \\
+\textbf{Riesgos de interpretación} & Depende del tamaño de la base; compárese como \% del MRR. TotalCharges no es ingreso del período \\
+\textbf{Acción asociada} & Priorizar los segmentos que concentran el 80 \% de la pérdida \\
+\textbf{Medida DAX} & [MRR Perdido] \\
+\textbf{Valor en el corte} & USD 139,131 \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
+
+\subsection*{A.4 Churn temprano (0–6 meses)}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Tasa (cohorte de antigüedad) \\
+\textbf{Objetivo asociado} & Mejorar la experiencia inicial \\
+\textbf{Decisión que soporta} & Si reforzar el onboarding de clientes nuevos \\
+\textbf{Definición de negocio} & Porcentaje de clientes con 0 a 6 meses de antigüedad que abandonan \\
+\textbf{Fórmula} & Σ churn[antigüedad ≤ 6] / clientes[antigüedad ≤ 6] \\
+\textbf{Numerador} & Clientes con antigüedad ≤ 6 y churn = 1 \\
+\textbf{Denominador} & Clientes con antigüedad ≤ 6 \\
+\textbf{Unidad} & \% \\
+\textbf{Ventana temporal} & Período de corte; cohorte por antigüedad \\
+\textbf{Filtros de inclusión} & antiguedad\_meses ≤ 6 \\
+\textbf{Exclusiones} & Ninguna \\
+\textbf{Dimensiones de segmentación} & Contrato, internet, pago \\
+\textbf{Meta o umbral} & ≤ 45 \% (verde); 45–52.9 \% (amarillo); > 52.9 \% (rojo) \\
+\textbf{Dirección deseada} & Bajar \\
+\textbf{Métricas de balance} & Costo de onboarding por cliente, satisfacción (no disponible) \\
+\textbf{Dueño} & Customer Success \\
+\textbf{Riesgos de interpretación} & Mezcla efecto contrato (los nuevos son mayoritariamente mes a mes) y sesgo de supervivencia \\
+\textbf{Acción asociada} & Si sube, contactar a los clientes nuevos en los meses 1 a 3 (palanca L4) \\
+\textbf{Medida DAX} & [Churn Temprano 0-6m] \\
+\textbf{Valor en el corte} & 52.9 \% \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
+
+\subsection*{A.5 \% clientes con contrato a plazo}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Composición \\
+\textbf{Objetivo asociado} & Estabilizar la base \\
+\textbf{Decisión que soporta} & Si invertir en migración a contratos anuales \\
+\textbf{Definición de negocio} & Proporción de clientes con contrato de uno o dos años \\
+\textbf{Fórmula} & clientes[contrato ≠ 'Mes a mes'] / clientes \\
+\textbf{Numerador} & Clientes con contrato de 1 o 2 años \\
+\textbf{Denominador} & Clientes en el corte \\
+\textbf{Unidad} & \% \\
+\textbf{Ventana temporal} & Período de corte \\
+\textbf{Filtros de inclusión} & registro\_valido = 1 \\
+\textbf{Exclusiones} & Ninguna \\
+\textbf{Dimensiones de segmentación} & Internet, antigüedad, pago \\
+\textbf{Meta o umbral} & ≥ 50 \% \\
+\textbf{Dirección deseada} & Subir \\
+\textbf{Métricas de balance} & ARPU (descuentos de migración), ROI de L1 \\
+\textbf{Dueño} & Dirección Comercial \\
+\textbf{Riesgos de interpretación} & Manipulable con descuentos (Goodhart): subirla comprando permanencia puede destruir margen \\
+\textbf{Acción asociada} & Ofrecer migración solo a clientes de riesgo alto con ROI positivo \\
+\textbf{Medida DAX} & [\% Contrato a Plazo] \\
+\textbf{Valor en el corte} & 45.0 \% \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
+
+\subsection*{A.6 \% clientes con pago automático}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Composición \\
+\textbf{Objetivo asociado} & Reducir la fricción de pago \\
+\textbf{Decisión que soporta} & Si incentivar el cambio desde cheque electrónico \\
+\textbf{Definición de negocio} & Proporción de clientes que pagan con transferencia o tarjeta automática \\
+\textbf{Fórmula} & clientes[pago\_automatico = 1] / clientes \\
+\textbf{Numerador} & Clientes con pago automático \\
+\textbf{Denominador} & Clientes en el corte \\
+\textbf{Unidad} & \% \\
+\textbf{Ventana temporal} & Período de corte \\
+\textbf{Filtros de inclusión} & registro\_valido = 1 \\
+\textbf{Exclusiones} & Ninguna \\
+\textbf{Dimensiones de segmentación} & Contrato, internet, antigüedad \\
+\textbf{Meta o umbral} & ≥ 50 \% \\
+\textbf{Dirección deseada} & Subir \\
+\textbf{Métricas de balance} & Costo del incentivo (L3), reclamos de facturación (no disponible) \\
+\textbf{Dueño} & Facturación y cobranzas \\
+\textbf{Riesgos de interpretación} & La asociación con menor churn puede reflejar el perfil del cliente y no causalidad \\
+\textbf{Acción asociada} & Crédito de USD 10 por migrar a pago automático (palanca L3) y medir con grupo control \\
+\textbf{Medida DAX} & [\% Pago Automático] \\
+\textbf{Valor en el corte} & 43.5 \% \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
+
+\subsection*{A.7 Adopción de protección}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Tasa de adopción \\
+\textbf{Objetivo asociado} & Aumentar el valor percibido del servicio de internet \\
+\textbf{Decisión que soporta} & Si ofrecer el bundle de seguridad y soporte \\
+\textbf{Definición de negocio} & Proporción de clientes con internet que tienen seguridad online o soporte técnico \\
+\textbf{Fórmula} & clientes[tiene\_proteccion = 1 y tiene\_internet = 1] / clientes[tiene\_internet = 1] \\
+\textbf{Numerador} & Clientes con internet y seguridad o soporte \\
+\textbf{Denominador} & Clientes con internet (excluye 'Sin servicio') \\
+\textbf{Unidad} & \% \\
+\textbf{Ventana temporal} & Período de corte \\
+\textbf{Filtros de inclusión} & tiene\_internet = 1 \\
+\textbf{Exclusiones} & Clientes sin internet \\
+\textbf{Dimensiones de segmentación} & Tipo de internet, contrato, antigüedad \\
+\textbf{Meta o umbral} & +5 pp sobre el corte \\
+\textbf{Dirección deseada} & Subir \\
+\textbf{Métricas de balance} & Costo del bundle (L2), ARPU \\
+\textbf{Dueño} & Producto / Marketing de servicios \\
+\textbf{Riesgos de interpretación} & Incluir clientes sin internet en el denominador subestima la adopción; la asociación no es causal \\
+\textbf{Acción asociada} & Bundle de 3 meses sin costo para clientes de fibra sin protección (palanca L2) \\
+\textbf{Medida DAX} & [Adopción Protección] \\
+\textbf{Valor en el corte} & 53.7 \% \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
+
+\subsection*{A.8 ARPU (balance)}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Razón (unit economics) \\
+\textbf{Objetivo asociado} & Evitar retener destruyendo valor \\
+\textbf{Decisión que soporta} & Límite a los descuentos de retención \\
+\textbf{Definición de negocio} & Ingreso recurrente mensual promedio por cliente \\
+\textbf{Fórmula} & Σ cargo\_mensual / DISTINCTCOUNT(customer\_id) \\
+\textbf{Numerador} & MRR total \\
+\textbf{Denominador} & Clientes únicos \\
+\textbf{Unidad} & USD por cliente por mes \\
+\textbf{Ventana temporal} & Período de corte \\
+\textbf{Filtros de inclusión} & registro\_valido = 1 \\
+\textbf{Exclusiones} & Ninguna \\
+\textbf{Dimensiones de segmentación} & Contrato, internet, estado del cliente \\
+\textbf{Meta o umbral} & No caer más de 3 \% frente al corte \\
+\textbf{Dirección deseada} & Mantener \\
+\textbf{Métricas de balance} & Es la métrica de balance del NSM \\
+\textbf{Dueño} & CFO \\
+\textbf{Riesgos de interpretación} & Puede subir porque se van los clientes de menor valor (efecto mezcla); calcularlo como razón de sumas \\
+\textbf{Acción asociada} & Si cae más de 3 \%, suspender o limitar la palanca de descuento (L1) \\
+\textbf{Medida DAX} & [ARPU] \\
+\textbf{Valor en el corte} & USD 64.76 \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}
+
+\subsection*{A.9 MRR en riesgo esperado}
+\begin{footnotesize}
+\begin{longtable}{@{}p{0.27\textwidth}p{0.69\textwidth}@{}}
+\toprule
+\textbf{Tipo} & Volumen esperado (USD) \\
+\textbf{Objetivo asociado} & Anticipar la pérdida (indicador líder) \\
+\textbf{Decisión que soporta} & A quién contactar esta semana y con qué prioridad \\
+\textbf{Definición de negocio} & Pérdida de MRR esperada en el próximo período si se repiten las tasas del corte \\
+\textbf{Fórmula} & Σ prob\_churn × cargo\_mensual (clientes activos) \\
+\textbf{Numerador} & — \\
+\textbf{Denominador} & — (volumen esperado) \\
+\textbf{Unidad} & USD por mes \\
+\textbf{Ventana temporal} & Próximo período \\
+\textbf{Filtros de inclusión} & churn = 0 (clientes activos) \\
+\textbf{Exclusiones} & Clientes que ya abandonaron \\
+\textbf{Dimensiones de segmentación} & Riesgo (alto/medio/bajo), segmento, palanca \\
+\textbf{Meta o umbral} & −15 \% frente al corte; alerta si sube más de 10 \% \\
+\textbf{Dirección deseada} & Bajar \\
+\textbf{Métricas de balance} & Costo del programa, ROI \\
+\textbf{Dueño} & Gerencia de Retención \\
+\textbf{Riesgos de interpretación} & Depende de un modelo calibrado en un corte con churn sobrerrepresentado; usar para ordenar, no como pronóstico exacto \\
+\textbf{Acción asociada} & Asignar las palancas a los clientes de riesgo alto (sección 10) \\
+\textbf{Medida DAX} & [MRR en Riesgo Esperado] \\
+\textbf{Valor en el corte} & USD 68,096 \\
+\textbf{Fuente de datos} & df\_analitico (derivada de WA\_Fn-UseC\_-Telco-Customer-Churn.csv) / fact\_clientes en Power BI \\
+\textbf{Frecuencia de actualización} & Mensual, con cada corte de clientes (hoy existe un solo corte) \\
+\textbf{Granularidad} & Cliente (cálculo) → segmento y mes (reporte) \\
+\textbf{Unidad de análisis} & Cliente \\
+\bottomrule
+\end{longtable}
+\end{footnotesize}

@@ -1,0 +1,16 @@
+﻿Columna,Descripción,Tipo,Uso en métricas
+customer_id,Identificador del cliente (llave primaria),ID,Conteo de clientes únicos
+"genero, adulto_mayor, pareja, dependientes",Perfil demográfico homologado,Categórica,Segmentación diagnóstica
+antiguedad_meses,Meses con la compañía (tenure),Numérica / temporal,"Eje de ciclo de vida, churn temprano"
+"banda_antiguedad, etapa_ciclo_vida",Agrupación ordenada de la antigüedad,Categórica ordinal,Cohortes por antigüedad
+"contrato, contrato_plazo",Tipo de contrato y bandera de plazo (1 o 2 años),Categórica / bandera,"% contratos a plazo, churn por contrato"
+"servicio_internet, tiene_internet",Tipo de internet y bandera,Categórica / bandera,"Churn por servicio, denominador de adopción"
+seguridad_online … streaming_peliculas,Complementos (Sí / No / Sin servicio),Categórica,Adopción de servicios
+"n_servicios_valor, tiene_proteccion",Número de complementos y bandera seguridad o soporte,Numérica / bandera,Adopción de protección
+"metodo_pago, pago_automatico",Método de pago y bandera automática,Categórica / bandera,% pago automático
+facturacion_electronica,Factura electrónica,Categórica,Segmentación diagnóstica
+cargo_mensual,Cargo mensual = MRR del cliente (USD),Numérica,"MRR, ARPU"
+"cargo_total, cargo_total_imputado",Cargo acumulado (USD) y bandera de imputación,Numérica / bandera,Valor histórico (no es ingreso del período)
+"churn, estado_cliente",Resultado: abandonó en el corte (1/0),Bandera / categórica,Tasa de churn
+mrr_perdido,cargo_mensual × churn,Numérica,"MRR perdido, % MRR retenido (NSM)"
+registro_valido,Pasa todas las validaciones de calidad,Bandera,Trazabilidad

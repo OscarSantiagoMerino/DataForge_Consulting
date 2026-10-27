@@ -1,0 +1,5 @@
+metodo_pago,pago_orden,es_automatico
+Cheque electrónico,1,0
+Cheque por correo,2,0
+Transferencia bancaria (automática),3,1
+Tarjeta de crédito (automática),4,1

@@ -1,0 +1,13 @@
+﻿escenario,escenario_orden,palanca_id,aceptacion,reduccion,margen,horizonte_meses,costo_contacto,incentivo_fijo,incentivo_pct_cargo
+Conservador,1,L1,0.15,0.2,0.45,6,2.0,0.0,1.2
+Conservador,1,L2,0.2,0.1,0.45,6,2.0,16.5825,0.0
+Conservador,1,L3,0.2,0.1,0.45,6,2.0,10.0,0.0
+Conservador,1,L4,0.5,0.05,0.45,6,0.0,8.0,0.0
+Base,2,L1,0.25,0.35,0.55,12,2.0,0.0,1.2
+Base,2,L2,0.3,0.2,0.55,12,2.0,13.5675,0.0
+Base,2,L3,0.3,0.15,0.55,12,2.0,10.0,0.0
+Base,2,L4,0.65,0.1,0.55,12,0.0,8.0,0.0
+Optimista,3,L1,0.35,0.5,0.65,18,2.0,0.0,1.2
+Optimista,3,L2,0.4,0.3,0.65,18,2.0,10.5525,0.0
+Optimista,3,L3,0.4,0.25,0.65,18,2.0,10.0,0.0
+Optimista,3,L4,0.8,0.2,0.65,18,0.0,8.0,0.0

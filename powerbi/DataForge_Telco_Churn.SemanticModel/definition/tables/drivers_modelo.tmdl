@@ -1,0 +1,78 @@
+/// Odds ratios del modelo logístico (tabla desconectada).
+table drivers_modelo
+	lineageTag: 6de09fef-233a-5234-952f-3e0ebcd4bfe6
+
+	column factor
+		dataType: string
+		lineageTag: 7104a62e-9a7f-5c40-80fb-4a97dd438754
+		summarizeBy: none
+		sourceColumn: factor
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = User
+
+	column odds_ratio
+		dataType: double
+		formatString: 0.00
+		lineageTag: 12bb4a98-aec8-5d8b-ab89-ec02ce074857
+		summarizeBy: none
+		sourceColumn: odds_ratio
+
+		annotation SummarizationSetBy = User
+
+	column ic_inf
+		dataType: double
+		formatString: 0.00
+		lineageTag: ea0f922b-3fd1-5992-a917-415df0afb92e
+		summarizeBy: none
+		sourceColumn: ic_inf
+
+		annotation SummarizationSetBy = User
+
+	column ic_sup
+		dataType: double
+		formatString: 0.00
+		lineageTag: 5a07d44b-0374-5961-b332-7b82ff76866a
+		summarizeBy: none
+		sourceColumn: ic_sup
+
+		annotation SummarizationSetBy = User
+
+	column p_valor
+		dataType: double
+		formatString: 0.0000
+		lineageTag: 2342fc0c-3c93-536a-8497-03e1fbd75a3d
+		summarizeBy: none
+		sourceColumn: p_valor
+
+		annotation SummarizationSetBy = User
+
+	column direccion
+		dataType: string
+		lineageTag: a74f53d3-02ab-597f-9fd1-4e66293af2fe
+		summarizeBy: none
+		sourceColumn: direccion
+
+		annotation SummarizationSetBy = User
+
+	column orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: e39d8e18-5840-5a45-b251-dc7e15b2dab3
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = User
+
+	partition drivers_modelo = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "drivers_modelo.csv"), [Delimiter = ",", Columns = 7, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"factor", type text}, {"odds_ratio", type number}, {"ic_inf", type number}, {"ic_sup", type number}, {"p_valor", type number}, {"direccion", type text}, {"orden", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

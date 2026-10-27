@@ -1,0 +1,106 @@
+/// Plan de monitoreo y acción (tabla desconectada).
+table plan_monitoreo
+	lineageTag: 3540d392-8fe8-5d3b-a6c6-2d5f14b56f8e
+
+	column 'Métrica'
+		dataType: string
+		lineageTag: 3aa547c6-5ac8-546f-93c7-f2397ab0d955
+		summarizeBy: none
+		sourceColumn: Métrica
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = User
+
+	column 'Valor en el corte'
+		dataType: string
+		lineageTag: 5dca36f4-c0c6-5148-a529-5e9aa564e4a5
+		summarizeBy: none
+		sourceColumn: Valor en el corte
+
+		annotation SummarizationSetBy = User
+
+	column Meta
+		dataType: string
+		lineageTag: 2dcd09af-423d-5f59-8c16-38d5a31c3c48
+		summarizeBy: none
+		sourceColumn: Meta
+
+		annotation SummarizationSetBy = User
+
+	column Verde
+		dataType: string
+		lineageTag: a360c7cf-c18b-5cc7-8e5c-bed3c177bd69
+		summarizeBy: none
+		sourceColumn: Verde
+
+		annotation SummarizationSetBy = User
+
+	column Amarillo
+		dataType: string
+		lineageTag: 46f26bad-52ec-5d3d-95e0-73a01a11489c
+		summarizeBy: none
+		sourceColumn: Amarillo
+
+		annotation SummarizationSetBy = User
+
+	column Rojo
+		dataType: string
+		lineageTag: d77214fe-1137-5d6f-94cb-deef459f7dd0
+		summarizeBy: none
+		sourceColumn: Rojo
+
+		annotation SummarizationSetBy = User
+
+	column 'Interpretación'
+		dataType: string
+		lineageTag: f865786e-f8ef-5075-b810-090ce1824874
+		summarizeBy: none
+		sourceColumn: Interpretación
+
+		annotation SummarizationSetBy = User
+
+	column 'Acción sugerida'
+		dataType: string
+		lineageTag: 8a5632a7-5c43-5493-aa85-8021b3018341
+		summarizeBy: none
+		sourceColumn: Acción sugerida
+
+		annotation SummarizationSetBy = User
+
+	column Responsable
+		dataType: string
+		lineageTag: ed1cc848-835d-5a2c-a4d8-4604d6d438da
+		summarizeBy: none
+		sourceColumn: Responsable
+
+		annotation SummarizationSetBy = User
+
+	column Frecuencia
+		dataType: string
+		lineageTag: 9fefab2e-8611-5c82-8db1-a5a1b78f57aa
+		summarizeBy: none
+		sourceColumn: Frecuencia
+
+		annotation SummarizationSetBy = User
+
+	column orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 28d537be-b631-5e3c-a93a-e616736ba741
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = User
+
+	partition plan_monitoreo = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "plan_monitoreo.csv"), [Delimiter = ",", Columns = 11, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"Métrica", type text}, {"Valor en el corte", type text}, {"Meta", type text}, {"Verde", type text}, {"Amarillo", type text}, {"Rojo", type text}, {"Interpretación", type text}, {"Acción sugerida", type text}, {"Responsable", type text}, {"Frecuencia", type text}, {"orden", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,101 @@
+/// Supuestos explícitos por escenario y palanca (tabla desconectada).
+table supuestos_escenario
+	lineageTag: 18d44124-ca5f-59a5-87bc-62f017490c32
+
+	column escenario
+		dataType: string
+		lineageTag: a1c8dd10-043d-5172-99ea-eb6ae867c9bd
+		summarizeBy: none
+		sourceColumn: escenario
+
+		annotation SummarizationSetBy = User
+
+	column escenario_orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 5cc27404-3e15-5339-b7e9-7bb52aa30e4a
+		summarizeBy: none
+		sourceColumn: escenario_orden
+
+		annotation SummarizationSetBy = User
+
+	column palanca_id
+		dataType: string
+		lineageTag: 32e33650-0499-5d1d-8331-651ff4c36674
+		summarizeBy: none
+		sourceColumn: palanca_id
+
+		annotation SummarizationSetBy = User
+
+	column aceptacion
+		dataType: double
+		formatString: 0%
+		lineageTag: 144880d1-63bb-53ce-b940-17a3152b073e
+		summarizeBy: none
+		sourceColumn: aceptacion
+
+		annotation SummarizationSetBy = User
+
+	column reduccion
+		dataType: double
+		formatString: 0%
+		lineageTag: 45786c8f-7a19-57f8-9354-70ceff415539
+		summarizeBy: none
+		sourceColumn: reduccion
+
+		annotation SummarizationSetBy = User
+
+	column margen
+		dataType: double
+		formatString: 0%
+		lineageTag: 28f524c0-0ec3-5295-9e33-866d0173ad95
+		summarizeBy: none
+		sourceColumn: margen
+
+		annotation SummarizationSetBy = User
+
+	column horizonte_meses
+		dataType: int64
+		formatString: 0
+		lineageTag: c513fb84-c344-52e1-80c8-eaf07cac492f
+		summarizeBy: none
+		sourceColumn: horizonte_meses
+
+		annotation SummarizationSetBy = User
+
+	column costo_contacto
+		dataType: double
+		lineageTag: cb261eb2-da99-52a5-8521-8824bd4450aa
+		summarizeBy: none
+		sourceColumn: costo_contacto
+
+		annotation SummarizationSetBy = User
+
+	column incentivo_fijo
+		dataType: double
+		lineageTag: b6277d1c-3faa-5f68-aca3-93fbfcf6a72a
+		summarizeBy: none
+		sourceColumn: incentivo_fijo
+
+		annotation SummarizationSetBy = User
+
+	column incentivo_pct_cargo
+		dataType: double
+		lineageTag: 611bfc92-65a9-51ff-aa72-d533407dce8e
+		summarizeBy: none
+		sourceColumn: incentivo_pct_cargo
+
+		annotation SummarizationSetBy = User
+
+	partition supuestos_escenario = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "supuestos_escenario.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"escenario", type text}, {"escenario_orden", Int64.Type}, {"palanca_id", type text}, {"aceptacion", type number}, {"reduccion", type number}, {"margen", type number}, {"horizonte_meses", Int64.Type}, {"costo_contacto", type number}, {"incentivo_fijo", type number}, {"incentivo_pct_cargo", type number}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

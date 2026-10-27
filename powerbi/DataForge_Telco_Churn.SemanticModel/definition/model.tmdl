@@ -1,0 +1,27 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["RutaDatos", "Medidas", "fact_clientes", "dim_antiguedad", "dim_contrato", "dim_internet", "dim_pago", "dim_riesgo", "dim_palanca", "dim_segmento", "dim_escenario", "supuestos_escenario", "drivers_modelo", "dim_metricas", "plan_monitoreo"]
+
+ref table Medidas
+ref table fact_clientes
+ref table dim_antiguedad
+ref table dim_contrato
+ref table dim_internet
+ref table dim_pago
+ref table dim_riesgo
+ref table dim_palanca
+ref table dim_segmento
+ref table dim_escenario
+ref table supuestos_escenario
+ref table drivers_modelo
+ref table dim_metricas
+ref table plan_monitoreo

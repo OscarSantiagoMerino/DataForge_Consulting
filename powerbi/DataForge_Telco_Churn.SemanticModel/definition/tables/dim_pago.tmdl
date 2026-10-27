@@ -1,0 +1,43 @@
+/// Método de pago.
+table dim_pago
+	lineageTag: 61a37948-ae37-53c3-8191-bd023929af87
+
+	column metodo_pago
+		dataType: string
+		lineageTag: 5ddf4210-70e5-5d46-973e-6bd331311eea
+		summarizeBy: none
+		sourceColumn: metodo_pago
+		sortByColumn: pago_orden
+
+		annotation SummarizationSetBy = User
+
+	column pago_orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: c0bfe68f-3d29-53e9-bbb6-6aac8511c8e2
+		summarizeBy: none
+		sourceColumn: pago_orden
+
+		annotation SummarizationSetBy = User
+
+	column es_automatico
+		dataType: int64
+		formatString: 0
+		lineageTag: 9540e6eb-b796-59d2-9763-4c53296a4c89
+		summarizeBy: none
+		sourceColumn: es_automatico
+
+		annotation SummarizationSetBy = User
+
+	partition dim_pago = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "dim_pago.csv"), [Delimiter = ",", Columns = 3, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"metodo_pago", type text}, {"pago_orden", Int64.Type}, {"es_automatico", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

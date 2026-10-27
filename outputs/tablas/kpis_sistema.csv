@@ -1,0 +1,13 @@
+﻿Tipo,KPI,Valor en el corte,Meta,Dirección,Frecuencia,Dueño
+Estratégico,% MRR retenido (North Star),69.5 %,≥ 75.0 %,Subir,Mensual,Gerencia de Retención / Comité
+Estratégico,Tasa de churn de clientes,26.5 %,≤ 22.0 %,Bajar,Mensual,Gerencia de Retención
+Estratégico,MRR perdido por churn,"USD 139,131",≤ 25 % del MRR,Bajar,Mensual,CFO / Gerencia de Retención
+Estratégico,% clientes con contrato a plazo,45.0 %,≥ 50.0 %,Subir,Mensual,Dirección Comercial
+Operativo,Churn temprano (0–6 meses),52.9 %,≤ 45.0 %,Bajar,Semanal,Customer Success (onboarding)
+Operativo,% clientes con pago automático,43.5 %,≥ 50.0 %,Subir,Mensual,Facturación y cobranzas
+Operativo,Adopción de protección (seguridad o soporte),53.7 %,≥ 58.7 %,Subir,Mensual,Producto / Marketing de servicios
+Operativo,MRR en riesgo alto (clientes activos),Ver sección 10,−15 % frente al corte,Bajar,Semanal,Gerencia de Retención
+Diagnóstico,"Churn por contrato, servicio, pago, antigüedad y protección",Ver sección 9,—,—,Mensual,Analítica (DataForge)
+Diagnóstico,ARPU de quienes abandonan vs. activos,USD 74.44 vs. USD 61.27,—,—,Mensual,Analítica (DataForge)
+Balance,ARPU,USD 64.76,≥ USD 62.82 (−3 %),Mantener,Mensual,CFO
+Balance,ROI del programa de retención,Ver sección 10,≥ 0 (escenario base),Subir,Trimestral,CFO / Gerencia de Retención

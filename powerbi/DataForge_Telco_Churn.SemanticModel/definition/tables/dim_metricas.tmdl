@@ -1,0 +1,226 @@
+/// Diccionario técnico de métricas (tabla desconectada).
+table dim_metricas
+	lineageTag: 5455c8e0-e557-59e5-9635-620688a11671
+
+	column orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 22da9164-799d-57d6-956a-cdb38c638c88
+		summarizeBy: none
+		sourceColumn: orden
+
+		annotation SummarizationSetBy = User
+
+	column Nombre
+		dataType: string
+		lineageTag: 0be6f1ae-41cf-5843-af92-892f948a3f49
+		summarizeBy: none
+		sourceColumn: Nombre
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = User
+
+	column Tipo
+		dataType: string
+		lineageTag: aaebfc9d-6377-5f12-9e78-54fd0fb927d0
+		summarizeBy: none
+		sourceColumn: Tipo
+
+		annotation SummarizationSetBy = User
+
+	column 'Objetivo asociado'
+		dataType: string
+		lineageTag: 761aa862-5fc9-5fa1-bdc6-9f2530d26e0c
+		summarizeBy: none
+		sourceColumn: Objetivo asociado
+
+		annotation SummarizationSetBy = User
+
+	column 'Decisión que soporta'
+		dataType: string
+		lineageTag: 43677719-a063-5d34-8309-249f664d55ea
+		summarizeBy: none
+		sourceColumn: Decisión que soporta
+
+		annotation SummarizationSetBy = User
+
+	column 'Definición de negocio'
+		dataType: string
+		lineageTag: 0624ac56-c02b-5283-bc34-fc1fdedcc9a1
+		summarizeBy: none
+		sourceColumn: Definición de negocio
+
+		annotation SummarizationSetBy = User
+
+	column 'Fórmula'
+		dataType: string
+		lineageTag: 246b3fba-efbb-5f49-bc60-7f38fe152077
+		summarizeBy: none
+		sourceColumn: Fórmula
+
+		annotation SummarizationSetBy = User
+
+	column Numerador
+		dataType: string
+		lineageTag: 1716266c-9ab2-5bff-b468-5ae742c55fdc
+		summarizeBy: none
+		sourceColumn: Numerador
+
+		annotation SummarizationSetBy = User
+
+	column Denominador
+		dataType: string
+		lineageTag: 4d2dbb81-9959-5638-ad12-be711e6f2dab
+		summarizeBy: none
+		sourceColumn: Denominador
+
+		annotation SummarizationSetBy = User
+
+	column Unidad
+		dataType: string
+		lineageTag: 12eb6d14-5630-585d-b9b8-7d24ee123871
+		summarizeBy: none
+		sourceColumn: Unidad
+
+		annotation SummarizationSetBy = User
+
+	column 'Ventana temporal'
+		dataType: string
+		lineageTag: 9bb25e67-303b-51a6-bb22-434d049f7e4b
+		summarizeBy: none
+		sourceColumn: Ventana temporal
+
+		annotation SummarizationSetBy = User
+
+	column 'Filtros de inclusión'
+		dataType: string
+		lineageTag: ee7a7211-77be-5675-993b-352405e67b05
+		summarizeBy: none
+		sourceColumn: Filtros de inclusión
+
+		annotation SummarizationSetBy = User
+
+	column Exclusiones
+		dataType: string
+		lineageTag: 29c14c8e-f10e-5cc7-837c-2094d14f8055
+		summarizeBy: none
+		sourceColumn: Exclusiones
+
+		annotation SummarizationSetBy = User
+
+	column 'Dimensiones de segmentación'
+		dataType: string
+		lineageTag: ee87f6c0-b1c4-5767-9987-cbc25873b5ea
+		summarizeBy: none
+		sourceColumn: Dimensiones de segmentación
+
+		annotation SummarizationSetBy = User
+
+	column 'Meta o umbral'
+		dataType: string
+		lineageTag: ae9d28a9-d891-5713-9d41-ff2da4d2408d
+		summarizeBy: none
+		sourceColumn: Meta o umbral
+
+		annotation SummarizationSetBy = User
+
+	column 'Dirección deseada'
+		dataType: string
+		lineageTag: 5686da0f-aa33-56a9-b2a5-34c91cfbc377
+		summarizeBy: none
+		sourceColumn: Dirección deseada
+
+		annotation SummarizationSetBy = User
+
+	column 'Métricas de balance'
+		dataType: string
+		lineageTag: 2b790f64-b42b-55ba-8622-3548f708aed2
+		summarizeBy: none
+		sourceColumn: Métricas de balance
+
+		annotation SummarizationSetBy = User
+
+	column 'Dueño'
+		dataType: string
+		lineageTag: 0566c2be-9e9e-5f52-b737-48097d9a9116
+		summarizeBy: none
+		sourceColumn: Dueño
+
+		annotation SummarizationSetBy = User
+
+	column 'Riesgos de interpretación'
+		dataType: string
+		lineageTag: d36968c4-c52d-5daa-bc91-fc3ff3a3b495
+		summarizeBy: none
+		sourceColumn: Riesgos de interpretación
+
+		annotation SummarizationSetBy = User
+
+	column 'Acción asociada'
+		dataType: string
+		lineageTag: 89e3da85-7e1e-57df-aad4-ee954c56d936
+		summarizeBy: none
+		sourceColumn: Acción asociada
+
+		annotation SummarizationSetBy = User
+
+	column 'Medida DAX'
+		dataType: string
+		lineageTag: d881b2f1-d3a0-51e2-9fe8-03b29e55988e
+		summarizeBy: none
+		sourceColumn: Medida DAX
+
+		annotation SummarizationSetBy = User
+
+	column 'Valor en el corte'
+		dataType: string
+		lineageTag: 735a8cfa-5bec-5f0c-84f2-63fd5a47203f
+		summarizeBy: none
+		sourceColumn: Valor en el corte
+
+		annotation SummarizationSetBy = User
+
+	column 'Fuente de datos'
+		dataType: string
+		lineageTag: f2de1e75-4eee-5d8b-a245-71cfd8191b65
+		summarizeBy: none
+		sourceColumn: Fuente de datos
+
+		annotation SummarizationSetBy = User
+
+	column 'Frecuencia de actualización'
+		dataType: string
+		lineageTag: f320cd2b-77d1-52c4-b489-fb693bf0d30a
+		summarizeBy: none
+		sourceColumn: Frecuencia de actualización
+
+		annotation SummarizationSetBy = User
+
+	column Granularidad
+		dataType: string
+		lineageTag: c512a264-296e-5052-838c-93edc9c1328a
+		summarizeBy: none
+		sourceColumn: Granularidad
+
+		annotation SummarizationSetBy = User
+
+	column 'Unidad de análisis'
+		dataType: string
+		lineageTag: 682ec368-e105-51d8-89d4-b31500ca23f2
+		summarizeBy: none
+		sourceColumn: Unidad de análisis
+
+		annotation SummarizationSetBy = User
+
+	partition dim_metricas = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "dim_metricas.csv"), [Delimiter = ",", Columns = 26, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"orden", Int64.Type}, {"Nombre", type text}, {"Tipo", type text}, {"Objetivo asociado", type text}, {"Decisión que soporta", type text}, {"Definición de negocio", type text}, {"Fórmula", type text}, {"Numerador", type text}, {"Denominador", type text}, {"Unidad", type text}, {"Ventana temporal", type text}, {"Filtros de inclusión", type text}, {"Exclusiones", type text}, {"Dimensiones de segmentación", type text}, {"Meta o umbral", type text}, {"Dirección deseada", type text}, {"Métricas de balance", type text}, {"Dueño", type text}, {"Riesgos de interpretación", type text}, {"Acción asociada", type text}, {"Medida DAX", type text}, {"Valor en el corte", type text}, {"Fuente de datos", type text}, {"Frecuencia de actualización", type text}, {"Granularidad", type text}, {"Unidad de análisis", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

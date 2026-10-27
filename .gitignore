@@ -1,0 +1,29 @@
+# Material del curso (enunciado y documentos de la profesora): no se versiona
+Enunciado/
+Documentos/
+
+# Entorno de Python
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+
+# Power BI: caché de datos y configuración local de cada usuario
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# LaTeX: archivos auxiliares de compilación
+informe/*.aux
+informe/*.log
+informe/*.out
+informe/*.toc
+informe/*.fls
+informe/*.fdb_latexmk
+informe/*.synctex.gz
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Configuración local de Claude Code
+.claude/

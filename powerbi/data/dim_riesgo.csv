@@ -1,0 +1,5 @@
+riesgo,riesgo_orden,definicion
+Alto,1,Score ≥ 40%
+Medio,2,Score entre 20% y 40%
+Bajo,3,Score < 20%
+No aplica (abandonó),4,Cliente que abandonó en el corte

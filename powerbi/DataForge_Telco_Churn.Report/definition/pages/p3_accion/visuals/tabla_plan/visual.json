@@ -1,0 +1,307 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "tabla_plan",
+  "position": {
+    "x": 16,
+    "y": 474,
+    "z": 10000,
+    "width": 1248,
+    "height": 238,
+    "tabOrder": 10000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "drillFilterOtherVisuals": true,
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "plan_monitoreo"
+                    }
+                  },
+                  "Property": "Métrica"
+                }
+              },
+              "queryRef": "plan_monitoreo.Métrica",
+              "nativeQueryRef": "Métrica",
+              "displayName": "Métrica"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "plan_monitoreo"
+                    }
+                  },
+                  "Property": "Valor en el corte"
+                }
+              },
+              "queryRef": "plan_monitoreo.Valor en el corte",
+              "nativeQueryRef": "Valor en el corte",
+              "displayName": "Valor en el corte"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "plan_monitoreo"
+                    }
+                  },
+                  "Property": "Verde"
+                }
+              },
+              "queryRef": "plan_monitoreo.Verde",
+              "nativeQueryRef": "Verde",
+              "displayName": "Verde"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "plan_monitoreo"
+                    }
+                  },
+                  "Property": "Amarillo"
+                }
+              },
+              "queryRef": "plan_monitoreo.Amarillo",
+              "nativeQueryRef": "Amarillo",
+              "displayName": "Amarillo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "plan_monitoreo"
+                    }
+                  },
+                  "Property": "Rojo"
+                }
+              },
+              "queryRef": "plan_monitoreo.Rojo",
+              "nativeQueryRef": "Rojo",
+              "displayName": "Rojo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "plan_monitoreo"
+                    }
+                  },
+                  "Property": "Acción sugerida"
+                }
+              },
+              "queryRef": "plan_monitoreo.Acción sugerida",
+              "nativeQueryRef": "Acción sugerida",
+              "displayName": "Acción sugerida"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "plan_monitoreo"
+                    }
+                  },
+                  "Property": "Responsable"
+                }
+              },
+              "queryRef": "plan_monitoreo.Responsable",
+              "nativeQueryRef": "Responsable",
+              "displayName": "Responsable"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "plan_monitoreo"
+                    }
+                  },
+                  "Property": "Frecuencia"
+                }
+              },
+              "queryRef": "plan_monitoreo.Frecuencia",
+              "nativeQueryRef": "Frecuencia",
+              "displayName": "Frecuencia"
+            }
+          ]
+        }
+      }
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#ffffff'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#e1e0d9'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "6D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Plan de monitoreo: umbrales, acción y responsable de cada métrica'"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "11D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#0b0b0b'"
+                    }
+                  }
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

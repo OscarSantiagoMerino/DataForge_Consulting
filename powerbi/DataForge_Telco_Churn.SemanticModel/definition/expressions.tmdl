@@ -1,0 +1,6 @@
+/// Carpeta con los CSV del modelo. Cambiarla en Transformar datos → Administrar parámetros si el proyecto se mueve.
+expression RutaDatos = "C:\Users\kimbo\Downloads\ProyectoFinalDIBA\powerbi\data\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: e9d024fd-afca-573b-80a1-49ab9192cce0
+
+	annotation PBI_ResultType = Text
+

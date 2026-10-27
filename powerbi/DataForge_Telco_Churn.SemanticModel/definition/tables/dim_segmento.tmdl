@@ -1,0 +1,98 @@
+/// Segmentos contrato × internet × etapa con su prioridad.
+table dim_segmento
+	lineageTag: 48aefd65-a9ce-5c72-89fc-4aafc0be85aa
+
+	column segmento_id
+		dataType: string
+		lineageTag: 545176f2-3ec4-564c-88cc-730525fd27c6
+		summarizeBy: none
+		sourceColumn: segmento_id
+
+		annotation SummarizationSetBy = User
+
+	column segmento
+		dataType: string
+		lineageTag: 3caef801-f56d-5198-8ef0-a0c1c1c9c501
+		summarizeBy: none
+		sourceColumn: segmento
+
+		annotation SummarizationSetBy = User
+
+	column contrato
+		dataType: string
+		lineageTag: 79072e22-4854-552f-b9de-8b9a643cd4e7
+		summarizeBy: none
+		sourceColumn: contrato
+
+		annotation SummarizationSetBy = User
+
+	column servicio_internet
+		dataType: string
+		lineageTag: ea574371-fa72-5717-8f81-f035523f55ce
+		summarizeBy: none
+		sourceColumn: servicio_internet
+
+		annotation SummarizationSetBy = User
+
+	column etapa_ciclo_vida
+		dataType: string
+		lineageTag: 6f4adddd-93e5-50e3-9041-57f231fa35e7
+		summarizeBy: none
+		sourceColumn: etapa_ciclo_vida
+
+		annotation SummarizationSetBy = User
+
+	column prioridad
+		dataType: string
+		lineageTag: a4233f07-26fa-5259-b174-cde8824f9c4a
+		summarizeBy: none
+		sourceColumn: prioridad
+		sortByColumn: prioridad_orden
+
+		annotation SummarizationSetBy = User
+
+	column palanca_dominante
+		dataType: string
+		lineageTag: 18cd3b23-c445-5456-bfd9-a433cfce1245
+		summarizeBy: none
+		sourceColumn: palanca_dominante
+
+		annotation SummarizationSetBy = User
+
+	column prioridad_orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 011b3c0f-cd53-51c5-88c7-84239d385c54
+		summarizeBy: none
+		sourceColumn: prioridad_orden
+
+		annotation SummarizationSetBy = User
+
+	column palanca
+		dataType: string
+		lineageTag: 907fd8d7-ed1e-562e-948a-1f5b9b8c96ea
+		summarizeBy: none
+		sourceColumn: palanca
+
+		annotation SummarizationSetBy = User
+
+	column responsable
+		dataType: string
+		lineageTag: c9fd1d40-e100-5785-ad1c-f5f89eb03d4d
+		summarizeBy: none
+		sourceColumn: responsable
+
+		annotation SummarizationSetBy = User
+
+	partition dim_segmento = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "dim_segmento.csv"), [Delimiter = ",", Columns = 10, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"segmento_id", type text}, {"segmento", type text}, {"contrato", type text}, {"servicio_internet", type text}, {"etapa_ciclo_vida", type text}, {"prioridad", type text}, {"palanca_dominante", type text}, {"prioridad_orden", Int64.Type}, {"palanca", type text}, {"responsable", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

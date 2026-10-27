@@ -1,0 +1,7 @@
+palanca_id,palanca,descripcion,responsable,esfuerzo,orden
+L4,Onboarding temprano,Acompañamiento proactivo en los meses 1 a 3 de la relación,Customer Success,Bajo,1
+L2,Bundle de protección,3 meses sin costo de seguridad online + soporte técnico,Producto / Marketing de servicios,Bajo,2
+L3,Pago automático,Crédito único de USD 10 al migrar desde cheque electrónico,Facturación y cobranzas,Bajo,3
+L1,Migración a contrato anual,10 % de descuento por 12 meses al pasar de mes a mes a un año,Comercial de retención,Medio,4
+L0,Sin palanca prioritaria,Cliente activo sin palanca aplicable: solo monitoreo,Gerencia de Retención,—,5
+NA,No aplica (abandonó),Cliente que ya abandonó en el corte,—,—,6

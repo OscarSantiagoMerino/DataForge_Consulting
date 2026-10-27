@@ -1,0 +1,341 @@
+/// Tabla de medidas DAX oficiales del sistema de métricas.
+table Medidas
+	lineageTag: c6ec0a68-3de3-5ed4-9aac-f2ac52b6f78a
+
+	/// Clientes únicos en el contexto de filtro.
+	measure Clientes = DISTINCTCOUNT ( fact_clientes[customer_id] )
+		formatString: #,0
+		displayFolder: 1. Base
+		lineageTag: 94f7ac10-41b1-5e4b-b2de-c0f7e1eb3eac
+
+	/// Clientes que abandonaron en el período de corte.
+	measure 'Clientes Churn' = CALCULATE ( [Clientes], fact_clientes[churn] = 1 )
+		formatString: #,0
+		displayFolder: 1. Base
+		lineageTag: 838d2934-5e1b-5bac-8e38-eab27aec9101
+
+	/// Clientes activos al cierre del corte.
+	measure 'Clientes Activos' = CALCULATE ( [Clientes], fact_clientes[churn] = 0 )
+		formatString: #,0
+		displayFolder: 1. Base
+		lineageTag: bd4e69d2-1e60-5aaf-aee9-bdff6fae6500
+
+	/// Ingreso recurrente mensual de todos los clientes del corte (USD).
+	measure 'MRR Total' = SUM ( fact_clientes[cargo_mensual] )
+		formatString: \$#,0
+		displayFolder: 1. Base
+		lineageTag: 2463145e-6d9b-58da-985e-81d8cb22c167
+
+	/// MRR de los clientes que abandonaron (USD por mes).
+	measure 'MRR Perdido' = SUM ( fact_clientes[mrr_perdido] )
+		formatString: \$#,0
+		displayFolder: 1. Base
+		lineageTag: 4e841024-9563-5b98-9c0d-bc4c4c913e9f
+
+	/// MRR de los clientes activos (USD por mes).
+	measure 'MRR Activo' = CALCULATE ( [MRR Total], fact_clientes[churn] = 0 )
+		formatString: \$#,0
+		displayFolder: 1. Base
+		lineageTag: a2917923-9ff6-5eac-98bb-f0a4f20a3723
+
+	/// MRR perdido / MRR total del período de corte.
+	measure '% MRR Perdido' = DIVIDE ( [MRR Perdido], [MRR Total] )
+		formatString: 0.0%
+		displayFolder: 2. KPIs estratégicos
+		lineageTag: 23cf578a-ce3f-5472-9781-100bd79b9e49
+
+	/// North Star Metric: proporción del MRR que se conserva al cierre del período (1 − MRR perdido / MRR total).
+	measure '% MRR Retenido' = IF ( ISBLANK ( [MRR Total] ), BLANK (), 1 - [% MRR Perdido] )
+		formatString: 0.0%
+		displayFolder: 2. KPIs estratégicos
+		lineageTag: ae575fa6-8f85-5b3e-8598-24854e5bb895
+
+	/// Clientes que abandonan / clientes del corte. Tasa del período de corte: no anualizar.
+	measure 'Tasa Churn' = DIVIDE ( [Clientes Churn], [Clientes] )
+		formatString: 0.0%
+		displayFolder: 2. KPIs estratégicos
+		lineageTag: 0421f1e2-04a8-563b-8186-a2948f0da525
+
+	/// Clientes con contrato de uno o dos años / clientes.
+	measure '% Contrato a Plazo' = DIVIDE ( CALCULATE ( [Clientes], dim_contrato[es_plazo] = 1 ), [Clientes] )
+		formatString: 0.0%
+		displayFolder: 2. KPIs estratégicos
+		lineageTag: 77470361-c64e-52cf-a320-790b0e06f55d
+
+	/// Tasa de churn de clientes con 0 a 6 meses de antigüedad.
+	measure 'Churn Temprano 0-6m' = CALCULATE ( [Tasa Churn], dim_antiguedad[banda_antiguedad] = "0–6 m" )
+		formatString: 0.0%
+		displayFolder: 3. KPIs operativos
+		lineageTag: 8a33c31d-8d18-5fb6-88ab-300cf7943230
+
+	/// Clientes con transferencia o tarjeta automática / clientes.
+	measure '% Pago Automático' = DIVIDE ( CALCULATE ( [Clientes], dim_pago[es_automatico] = 1 ), [Clientes] )
+		formatString: 0.0%
+		displayFolder: 3. KPIs operativos
+		lineageTag: 8d9fed47-e55c-574f-8677-1b70ac31b1a2
+
+	/// Clientes con internet que tienen seguridad online o soporte técnico / clientes con internet.
+	measure 'Adopción Protección' =
+			DIVIDE (
+			    CALCULATE ( [Clientes], fact_clientes[tiene_internet] = 1, fact_clientes[tiene_proteccion] = 1 ),
+			    CALCULATE ( [Clientes], fact_clientes[tiene_internet] = 1 )
+			)
+		formatString: 0.0%
+		displayFolder: 3. KPIs operativos
+		lineageTag: 3ba1b48a-67a0-5696-8fba-ee81cb7edca7
+
+	/// Clientes activos con score de churn ≥ 40 %.
+	measure 'Clientes Riesgo Alto' = CALCULATE ( [Clientes Activos], fact_clientes[riesgo] = "Alto" )
+		formatString: #,0
+		displayFolder: 3. KPIs operativos
+		lineageTag: c76a8889-623e-5215-9492-773705c8d3db
+
+	/// MRR de los clientes activos de riesgo alto.
+	measure 'MRR Riesgo Alto' = CALCULATE ( [MRR Activo], fact_clientes[riesgo] = "Alto" )
+		formatString: \$#,0
+		displayFolder: 3. KPIs operativos
+		lineageTag: 0aee10b7-8a1e-5d3b-ad4d-b3bff0cc6298
+
+	/// Σ probabilidad de churn × cargo mensual de los clientes activos: pérdida esperada si se repiten las tasas del corte.
+	measure 'MRR en Riesgo Esperado' =
+			VAR v = SUM ( fact_clientes[mrr_riesgo_esperado] )
+			RETURN
+			    IF ( v > 0, v )
+		formatString: \$#,0
+		displayFolder: 3. KPIs operativos
+		lineageTag: 565362db-2037-56cc-8716-9fc86a745be4
+
+	/// Métrica de balance: MRR / clientes (razón de sumas).
+	measure ARPU = DIVIDE ( [MRR Total], [Clientes] )
+		formatString: \$#,0.00
+		displayFolder: 4. Diagnóstico y balance
+		lineageTag: 9c92836a-3523-5177-9b91-58a30ca8cf5d
+
+	/// ARPU de los clientes que abandonaron.
+	measure 'ARPU Churners' = DIVIDE ( [MRR Perdido], [Clientes Churn] )
+		formatString: \$#,0.00
+		displayFolder: 4. Diagnóstico y balance
+		lineageTag: 41a225e9-430e-5080-88eb-a2ab3ed8acbf
+
+	/// Participación del segmento en el MRR perdido de la selección.
+	measure 'Participación MRR Perdido' = DIVIDE ( [MRR Perdido], CALCULATE ( [MRR Perdido], ALLSELECTED ( fact_clientes ) ) )
+		formatString: 0.0%
+		displayFolder: 4. Diagnóstico y balance
+		lineageTag: 9f1f19c5-2f25-59e9-aaa8-67a5bcec58a1
+
+	/// Odds ratio ajustado del modelo logístico (> 1 aumenta el riesgo).
+	measure 'Odds Ratio' = MAX ( drivers_modelo[odds_ratio] )
+		formatString: 0.00
+		displayFolder: 4. Diagnóstico y balance
+		lineageTag: 0efb7883-7ff9-5a9c-b794-1fd12240a6ed
+
+	/// Semáforo del % MRR retenido: verde ≥ 75 %, amarillo 69.5–75 %, rojo < 69.5 %.
+	measure 'Estado NSM' =
+			VAR v = ROUND ( [% MRR Retenido], 3 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [% MRR Retenido] ), BLANK (),
+			        v >= 0.75, "Verde · en meta",
+			        v >= 0.695, "Amarillo · vigilar",
+			        "Rojo · crítico"
+			    )
+		displayFolder: 5. Alertas
+		lineageTag: 1e26e1ef-b4cf-5b8d-a066-1e614a47c0b1
+
+	/// Color del semáforo del NSM.
+	measure 'Color NSM' =
+			VAR v = ROUND ( [% MRR Retenido], 3 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [% MRR Retenido] ), BLANK (),
+			        v >= 0.75, "#0ca30c",
+			        v >= 0.695, "#b07400",
+			        "#d03b3b"
+			    )
+		displayFolder: 5. Alertas
+		lineageTag: 3f145169-54dd-50cf-bfab-5d5ce5f7a4d5
+
+	/// Semáforo: verde ≤ 45 %, amarillo 45–52.9 %, rojo > 52.9 %.
+	measure 'Estado Churn Temprano' =
+			VAR v = ROUND ( [Churn Temprano 0-6m], 3 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [Churn Temprano 0-6m] ), BLANK (),
+			        v <= 0.45, "Verde · en meta",
+			        v <= 0.529, "Amarillo · vigilar",
+			        "Rojo · crítico"
+			    )
+		displayFolder: 5. Alertas
+		lineageTag: afcb74a7-0abb-5cf9-871d-a10aa6d4b474
+
+	/// Color del semáforo de churn temprano.
+	measure 'Color Churn Temprano' =
+			VAR v = ROUND ( [Churn Temprano 0-6m], 3 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [Churn Temprano 0-6m] ), BLANK (),
+			        v <= 0.45, "#0ca30c",
+			        v <= 0.529, "#b07400",
+			        "#d03b3b"
+			    )
+		displayFolder: 5. Alertas
+		lineageTag: 3657cf7b-1f29-54d5-83b0-9dad4b0eeff5
+
+	/// Guardrail: verde ≥ USD 64.76, amarillo hasta −3 %, rojo < USD 62.82.
+	measure 'Estado ARPU' =
+			VAR v = ROUND ( [ARPU], 3 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [ARPU] ), BLANK (),
+			        v >= 64.76, "Verde · en meta",
+			        v >= 62.82, "Amarillo · vigilar",
+			        "Rojo · crítico"
+			    )
+		displayFolder: 5. Alertas
+		lineageTag: 6b1a051f-47d5-596e-b78b-58374a23565b
+
+	/// Color del guardrail de ARPU.
+	measure 'Color ARPU' =
+			VAR v = ROUND ( [ARPU], 3 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [ARPU] ), BLANK (),
+			        v >= 64.76, "#0ca30c",
+			        v >= 62.82, "#b07400",
+			        "#d03b3b"
+			    )
+		displayFolder: 5. Alertas
+		lineageTag: 10a87885-77f6-5c25-bc74-c613def9c1a8
+
+	/// Escenario elegido en el segmentador (Base por defecto).
+	measure 'Escenario Seleccionado' = SELECTEDVALUE ( dim_escenario[escenario], "Base" )
+		displayFolder: 6. Simulador del programa
+		lineageTag: 8f2fb75b-73d7-5f73-a329-4cf8bc4dc594
+
+	/// Clientes activos con una palanca asignada.
+	measure 'Clientes Objetivo' = CALCULATE ( [Clientes Activos], NOT fact_clientes[palanca_id] IN { "L0", "NA" } )
+		formatString: #,0
+		displayFolder: 6. Simulador del programa
+		lineageTag: 453aa511-690d-5e0f-9e5d-59260b8308d2
+
+	/// Σ prob. de churn × aceptación × reducción atribuible (supuestos del escenario).
+	measure 'Clientes Salvados Esperados' =
+			VAR esc = [Escenario Seleccionado]
+			RETURN
+			    SUMX (
+			        FILTER ( fact_clientes, fact_clientes[churn] = 0 && NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) ),
+			        fact_clientes[prob_churn] * LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] ) * LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] )
+			    )
+		formatString: #,0.0
+		displayFolder: 6. Simulador del programa
+		lineageTag: 1890d613-fca2-5c84-9e6a-e0f8beb9d49b
+
+	/// MRR mensual que se espera conservar con el programa.
+	measure 'MRR Salvado Esperado' =
+			VAR esc = [Escenario Seleccionado]
+			RETURN
+			    SUMX (
+			        FILTER ( fact_clientes, fact_clientes[churn] = 0 && NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) ),
+			        fact_clientes[prob_churn] * fact_clientes[cargo_mensual] * LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] ) * LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] )
+			    )
+		formatString: \$#,0
+		displayFolder: 6. Simulador del programa
+		lineageTag: 7c8d2e72-7d92-5e8b-acdd-e339b295ea41
+
+	/// MRR salvado × margen de contribución × horizonte (meses).
+	measure 'Contribución Salvada' =
+			VAR esc = [Escenario Seleccionado]
+			RETURN
+			    SUMX (
+			        FILTER ( fact_clientes, fact_clientes[churn] = 0 && NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) ),
+			        fact_clientes[prob_churn] * fact_clientes[cargo_mensual] * LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] ) * LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] )
+			            * LOOKUPVALUE ( supuestos_escenario[margen], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] ) * LOOKUPVALUE ( supuestos_escenario[horizonte_meses], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] )
+			    )
+		formatString: \$#,0
+		displayFolder: 6. Simulador del programa
+		lineageTag: b7b10fd6-16cd-5ee5-bb32-89b35dc756ba
+
+	/// Costo de contacto + aceptación × incentivo de cada palanca.
+	measure 'Costo Programa' =
+			VAR esc = [Escenario Seleccionado]
+			RETURN
+			    SUMX (
+			        FILTER ( fact_clientes, fact_clientes[churn] = 0 && NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) ),
+			        LOOKUPVALUE ( supuestos_escenario[costo_contacto], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] )
+			            + LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] ) * ( LOOKUPVALUE ( supuestos_escenario[incentivo_fijo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] ) + LOOKUPVALUE ( supuestos_escenario[incentivo_pct_cargo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], fact_clientes[palanca_id] ) * fact_clientes[cargo_mensual] )
+			    )
+		formatString: \$#,0
+		displayFolder: 6. Simulador del programa
+		lineageTag: e6e81f06-1dff-591a-a28e-f79925ce478b
+
+	/// (Contribución salvada − costo) / costo, con los supuestos del escenario seleccionado.
+	measure 'ROI Programa' = DIVIDE ( [Contribución Salvada] - [Costo Programa], [Costo Programa] )
+		formatString: +0%;-0%;0%
+		displayFolder: 6. Simulador del programa
+		lineageTag: 08b3c679-f7e6-5989-8e52-d523d8197453
+
+	/// Costo del programa por cliente salvado.
+	measure 'Costo por Cliente Salvado' = DIVIDE ( [Costo Programa], [Clientes Salvados Esperados] )
+		formatString: \$#,0
+		displayFolder: 6. Simulador del programa
+		lineageTag: f3126087-e8eb-50d5-9507-90f4d667ff3a
+
+	/// ROI del programa aplicado solo a clientes activos de riesgo alto.
+	measure 'ROI Focalizado Riesgo Alto' = CALCULATE ( [ROI Programa], fact_clientes[riesgo] = "Alto" )
+		formatString: +0%;-0%;0%
+		displayFolder: 6. Simulador del programa
+		lineageTag: a897813a-ae1d-586e-ab58-96dabeeac41a
+
+	/// ROI del programa aplicado a todos los clientes activos con palanca.
+	measure 'ROI Sin Focalizar' = CALCULATE ( [ROI Programa], REMOVEFILTERS ( dim_riesgo ) )
+		formatString: +0%;-0%;0%
+		displayFolder: 6. Simulador del programa
+		lineageTag: 140c24fd-c840-54c3-9d7d-8397524c8049
+
+	/// Costo del programa focalizado.
+	measure 'Costo Focalizado' = CALCULATE ( [Costo Programa], fact_clientes[riesgo] = "Alto" )
+		formatString: \$#,0
+		displayFolder: 6. Simulador del programa
+		lineageTag: 85384f50-94ca-5501-890c-d076fba47dcf
+
+	/// Contribución esperada del programa focalizado.
+	measure 'Contribución Focalizada' = CALCULATE ( [Contribución Salvada], fact_clientes[riesgo] = "Alto" )
+		formatString: \$#,0
+		displayFolder: 6. Simulador del programa
+		lineageTag: 2581ae74-914d-5b77-b951-2c1a3a4a1f0d
+
+	/// Regla de decisión según el ROI focalizado del escenario.
+	measure 'Decisión Sugerida' =
+			VAR roi = [ROI Focalizado Riesgo Alto]
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( roi ), "Sin clientes objetivo en la selección",
+			        roi >= 0, "ROI focalizado positivo en el escenario " & [Escenario Seleccionado] & ": ejecutar como piloto con grupo control",
+			        "ROI negativo en el escenario " & [Escenario Seleccionado] & ": no escalar; revisar palancas y costos"
+			    )
+		displayFolder: 6. Simulador del programa
+		lineageTag: 62e2bb23-f88e-5a93-9d6c-0c7a693107f2
+
+	column Orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: c990426f-7eb5-553d-ad5a-501b0061bf9d
+		summarizeBy: none
+		sourceColumn: Orden
+
+		annotation SummarizationSetBy = User
+
+	partition Medidas = m
+		mode: import
+		source =
+				#table(type table [Orden = Int64.Type], {})
+
+	annotation PBI_ResultType = Table

@@ -1,0 +1,43 @@
+/// Tipo de servicio de internet.
+table dim_internet
+	lineageTag: 96a3ed19-53ad-5a0d-ab30-f06b3f32eca0
+
+	column servicio_internet
+		dataType: string
+		lineageTag: 0bb1c753-f323-530e-bf1d-c94ffcd71a78
+		summarizeBy: none
+		sourceColumn: servicio_internet
+		sortByColumn: internet_orden
+
+		annotation SummarizationSetBy = User
+
+	column internet_orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: f96a459b-16d1-515c-bf65-9fdb7d80f3e6
+		summarizeBy: none
+		sourceColumn: internet_orden
+
+		annotation SummarizationSetBy = User
+
+	column tiene_internet
+		dataType: int64
+		formatString: 0
+		lineageTag: b059f6dd-af25-5a9d-ac89-01cdcabcbf3b
+		summarizeBy: none
+		sourceColumn: tiene_internet
+
+		annotation SummarizationSetBy = User
+
+	partition dim_internet = m
+		mode: import
+		source =
+				let
+				    Origen = Csv.Document(File.Contents(RutaDatos & "dim_internet.csv"), [Delimiter = ",", Columns = 3, Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Encabezados = Table.PromoteHeaders(Origen, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Encabezados, {{"servicio_internet", type text}, {"internet_orden", Int64.Type}, {"tiene_internet", Int64.Type}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table

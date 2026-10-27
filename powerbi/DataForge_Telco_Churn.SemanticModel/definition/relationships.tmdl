@@ -1,0 +1,27 @@
+relationship 8c3854fe-3be0-5f28-a5f8-d9328faaa693
+	fromColumn: fact_clientes.antiguedad_meses
+	toColumn: dim_antiguedad.antiguedad_meses
+
+relationship 60251fb1-7b5b-5c3b-b238-6b750e0d927a
+	fromColumn: fact_clientes.contrato
+	toColumn: dim_contrato.contrato
+
+relationship a1bbfbe9-5247-5c86-bac5-bab4bf0a49d9
+	fromColumn: fact_clientes.servicio_internet
+	toColumn: dim_internet.servicio_internet
+
+relationship 171e7733-482f-59f5-a40b-3755103666c6
+	fromColumn: fact_clientes.metodo_pago
+	toColumn: dim_pago.metodo_pago
+
+relationship aef20ccc-830c-5fda-ad00-650747f1aeb8
+	fromColumn: fact_clientes.riesgo
+	toColumn: dim_riesgo.riesgo
+
+relationship 583a898f-6d53-5bd4-ada9-53191e4a39cf
+	fromColumn: fact_clientes.palanca_id
+	toColumn: dim_palanca.palanca_id
+
+relationship c4fa4a8d-5da8-5b14-97c1-42fccab4084c
+	fromColumn: fact_clientes.segmento_id
+	toColumn: dim_segmento.segmento_id
