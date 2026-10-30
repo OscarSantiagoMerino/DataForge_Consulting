@@ -1,6 +1,6 @@
 # DataForge Consulting · Sistema de Decision Intelligence para la retención de clientes (Caso Telco)
 
-Proyecto final de *Decision Intelligence & Business Analytics*, Maestría en Ciencia de Datos, Escuela Colombiana de Ingeniería Julio Garavito. Docente: Juliana De Mier Medellín.
+Proyecto final de *Decision Intelligence & Business Analytics*, Escuela Colombiana de Ingeniería Julio Garavito. Docente: Juliana De Mier Medellín.
 
 **Equipo:** Oscar Santiago Merino Suárez · Claudia Rocío Rodríguez Ortiz · Paula Andrea Gacha García · Daniel Felipe Pérez Pineda
 
