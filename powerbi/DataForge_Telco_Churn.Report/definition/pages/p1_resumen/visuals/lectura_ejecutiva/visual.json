@@ -2,12 +2,12 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
   "name": "lectura_ejecutiva",
   "position": {
-    "x": 632,
-    "y": 474,
-    "z": 14000,
-    "width": 632,
-    "height": 238,
-    "tabOrder": 14000
+    "x": 956,
+    "y": 498,
+    "z": 33000,
+    "width": 308,
+    "height": 214,
+    "tabOrder": 33000
   },
   "visual": {
     "visualType": "textbox",
@@ -22,9 +22,10 @@
                   {
                     "value": "Lectura ejecutiva",
                     "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#1b1f24",
                       "fontWeight": "bold",
-                      "fontSize": "12pt",
-                      "color": "#0b0b0b"
+                      "fontFamily": "Segoe UI Semibold"
                     }
                   }
                 ]
@@ -32,40 +33,56 @@
               {
                 "textRuns": [
                   {
-                    "value": "• Qué muestra: 26.5 % de los clientes abandonó en el período y se llevó 30.5 % del MRR; quienes se van pagan más (USD 74 vs. USD 61).",
-                    "textStyle": {
-                      "fontSize": "10pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Qué significa: la pérdida está concentrada — mes a mes con fibra es el 30 % de la base y el 72 % del MRR perdido — y ocurre sobre todo en los primeros meses (52.9 % en 0–6 m).",
-                    "textStyle": {
-                      "fontSize": "10pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "• Qué implica: no hacer descuentos masivos; intervenir de forma focalizada a los clientes de riesgo alto con palancas de bajo costo y validarlo con un piloto con grupo control (ver página 3).",
-                    "textStyle": {
-                      "fontSize": "10pt"
-                    }
-                  }
-                ]
-              },
-              {
-                "textRuns": [
-                  {
-                    "value": "Limitación: un solo corte sin fechas; el churn del dataset está sobrerrepresentado, así que las tasas se comparan entre segmentos y no se anualizan.",
+                    "value": "Qué muestra. ",
                     "textStyle": {
                       "fontSize": "9pt",
-                      "color": "#898781"
+                      "color": "#13294b",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "El 26,5 % de los clientes abandonó y se llevó el 30,5 % del MRR; quienes se van pagan más (USD 74 frente a USD 61).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#1b1f24"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Qué significa. ",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#13294b",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "La pérdida está concentrada en mes a mes con fibra y en los primeros meses (52,9 % en 0–6 m).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#1b1f24"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Qué implica. ",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#13294b",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Descartar descuentos masivos e intervenir de forma focalizada a los clientes de riesgo alto (vista 3).",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#1b1f24"
                     }
                   }
                 ]
@@ -122,7 +139,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#e1e0d9'"
+                      "Value": "'#dde3ea'"
                     }
                   }
                 }
@@ -131,7 +148,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "10D"
                 }
               }
             }
@@ -157,28 +174,41 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "10D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "10D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "14D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }

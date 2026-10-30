@@ -1,0 +1,17 @@
+/// Parámetro qué pasaría si: meses de permanencia adicional del cliente salvado.
+table sim_horizonte
+	lineageTag: 426e27e2-7fed-57c3-8378-68361a5e2445
+
+	column horizonte_meses
+		dataType: int64
+		formatString: 0
+		lineageTag: 20a6f834-896c-56a0-9fb8-9196d8b0230f
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [horizonte_meses]
+
+		annotation SummarizationSetBy = User
+
+	partition sim_horizonte = calculated
+		mode: import
+		source = SELECTCOLUMNS ( GENERATESERIES ( 3, 24, 3 ), "horizonte_meses", [Value] )

@@ -3,11 +3,11 @@
   "name": "tabla_plan",
   "position": {
     "x": 16,
-    "y": 474,
-    "z": 10000,
+    "y": 500,
+    "z": 25000,
     "width": 1248,
-    "height": 238,
-    "tabOrder": 10000
+    "height": 212,
+    "tabOrder": 25000
   },
   "visual": {
     "visualType": "tableEx",
@@ -44,7 +44,7 @@
               },
               "queryRef": "plan_monitoreo.Valor en el corte",
               "nativeQueryRef": "Valor en el corte",
-              "displayName": "Valor en el corte"
+              "displayName": "Corte"
             },
             {
               "field": {
@@ -104,7 +104,7 @@
               },
               "queryRef": "plan_monitoreo.Acción sugerida",
               "nativeQueryRef": "Acción sugerida",
-              "displayName": "Acción sugerida"
+              "displayName": "Acción si sale del umbral"
             },
             {
               "field": {
@@ -120,25 +120,152 @@
               "queryRef": "plan_monitoreo.Responsable",
               "nativeQueryRef": "Responsable",
               "displayName": "Responsable"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "plan_monitoreo"
-                    }
-                  },
-                  "Property": "Frecuencia"
-                }
-              },
-              "queryRef": "plan_monitoreo.Frecuencia",
-              "nativeQueryRef": "Frecuencia",
-              "displayName": "Frecuencia"
             }
           ]
         }
       }
+    },
+    "objects": {
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "wordWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "190D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "plan_monitoreo.Métrica"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "110D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "plan_monitoreo.Valor en el corte"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "plan_monitoreo.Verde"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "120D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "plan_monitoreo.Amarillo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "80D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "plan_monitoreo.Rojo"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "470D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "plan_monitoreo.Acción sugerida"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "160D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "plan_monitoreo.Responsable"
+          }
+        }
+      ]
     },
     "visualContainerObjects": {
       "background": [
@@ -187,7 +314,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#e1e0d9'"
+                      "Value": "'#dde3ea'"
                     }
                   }
                 }
@@ -196,7 +323,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "10D"
                 }
               }
             }
@@ -222,28 +349,41 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "8D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "8D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "12D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -263,7 +403,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Plan de monitoreo: umbrales, acción y responsable de cada métrica'"
+                  "Value": "'Plan de monitoreo (Plantilla 4): umbrales, interpretación y acción por métrica'"
                 }
               }
             },
@@ -277,7 +417,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "12D"
                 }
               }
             },
@@ -286,7 +426,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0b0b0b'"
+                      "Value": "'#1b1f24'"
                     }
                   }
                 }
@@ -296,6 +436,58 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Si una métrica sale de su umbral, se ejecuta la acción indicada y el responsable la reporta en el comité mensual'"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5b6573'"
+                    }
+                  }
                 }
               }
             }

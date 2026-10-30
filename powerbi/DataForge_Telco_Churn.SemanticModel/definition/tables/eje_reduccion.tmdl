@@ -1,0 +1,17 @@
+/// Eje de la curva de sensibilidad del ROI frente a la reducción atribuible.
+table eje_reduccion
+	lineageTag: 0ff7e3d9-6431-5c4a-a1c3-eb7f000fb08f
+
+	column reduccion_eje
+		dataType: double
+		formatString: 0%
+		lineageTag: d443d502-67e1-5465-ac16-d5a637961b15
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [reduccion_eje]
+
+		annotation SummarizationSetBy = User
+
+	partition eje_reduccion = calculated
+		mode: import
+		source = SELECTCOLUMNS ( GENERATESERIES ( 0, 20, 1 ), "reduccion_eje", [Value] / 100 )

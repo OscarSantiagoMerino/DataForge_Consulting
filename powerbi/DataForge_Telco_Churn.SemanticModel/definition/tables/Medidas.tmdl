@@ -129,6 +129,12 @@ table Medidas
 		displayFolder: 4. Diagnóstico y balance
 		lineageTag: 0efb7883-7ff9-5a9c-b794-1fd12240a6ed
 
+	/// Tasa de churn de la selección sin el filtro de antigüedad: línea de referencia del gráfico de ciclo de vida.
+	measure 'Promedio Churn Corte' = CALCULATE ( [Tasa Churn], REMOVEFILTERS ( dim_antiguedad ) )
+		formatString: 0.0%
+		displayFolder: 4. Diagnóstico y balance
+		lineageTag: 3030d502-b4e0-5203-85eb-a337a83de4a3
+
 	/// Semáforo del % MRR retenido: verde ≥ 75 %, amarillo 69.5–75 %, rojo < 69.5 %.
 	measure 'Estado NSM' =
 			VAR v = ROUND ( [% MRR Retenido], 3 )
@@ -150,9 +156,9 @@ table Medidas
 			    SWITCH (
 			        TRUE (),
 			        ISBLANK ( [% MRR Retenido] ), BLANK (),
-			        v >= 0.75, "#0ca30c",
+			        v >= 0.75, "#138a3f",
 			        v >= 0.695, "#b07400",
-			        "#d03b3b"
+			        "#c8312f"
 			    )
 		displayFolder: 5. Alertas
 		lineageTag: 3f145169-54dd-50cf-bfab-5d5ce5f7a4d5
@@ -178,9 +184,9 @@ table Medidas
 			    SWITCH (
 			        TRUE (),
 			        ISBLANK ( [Churn Temprano 0-6m] ), BLANK (),
-			        v <= 0.45, "#0ca30c",
+			        v <= 0.45, "#138a3f",
 			        v <= 0.529, "#b07400",
-			        "#d03b3b"
+			        "#c8312f"
 			    )
 		displayFolder: 5. Alertas
 		lineageTag: 3657cf7b-1f29-54d5-83b0-9dad4b0eeff5
@@ -206,12 +212,85 @@ table Medidas
 			    SWITCH (
 			        TRUE (),
 			        ISBLANK ( [ARPU] ), BLANK (),
-			        v >= 64.76, "#0ca30c",
+			        v >= 64.76, "#138a3f",
 			        v >= 62.82, "#b07400",
-			        "#d03b3b"
+			        "#c8312f"
 			    )
 		displayFolder: 5. Alertas
 		lineageTag: 10a87885-77f6-5c25-bc74-c613def9c1a8
+
+	/// Semáforo de la tasa de churn: verde ≤ 22 %, amarillo 22–26.5 %, rojo > 26.5 %.
+	measure 'Color Churn' =
+			VAR v = ROUND ( [Tasa Churn], 3 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [Tasa Churn] ), BLANK (),
+			        v <= 0.22, "#138a3f",
+			        v <= 0.265, "#b07400",
+			        "#c8312f"
+			    )
+		displayFolder: 5. Alertas
+		lineageTag: 4fe3c7bc-b01f-578c-a0dd-d792871533d1
+
+	/// Semáforo del % de contratos a plazo: verde ≥ 50 %, amarillo 45–50 %, rojo < 45 %.
+	measure 'Color Plazo' =
+			VAR v = ROUND ( [% Contrato a Plazo], 3 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( [% Contrato a Plazo] ), BLANK (),
+			        v >= 0.5, "#138a3f",
+			        v >= 0.45, "#b07400",
+			        "#c8312f"
+			    )
+		displayFolder: 5. Alertas
+		lineageTag: 39218d5e-2918-5530-9ef1-4b7516d0b072
+
+	/// Brecha del NSM frente a la meta, en puntos porcentuales.
+	measure 'Nota NSM' =
+			IF (
+			    ISBLANK ( [% MRR Retenido] ),
+			    BLANK (),
+			    FORMAT ( ( [% MRR Retenido] - 0.75 ) * 100, "+0.0;-0.0" ) & " pp vs. meta 75 %"
+			)
+		displayFolder: 5. Alertas
+		lineageTag: 0e2743c3-d5de-5141-8b19-8d5fbaf4fa35
+
+	/// Contexto de la tarjeta de MRR perdido.
+	measure 'Nota MRR Perdido' = FORMAT ( [% MRR Perdido], "0.0%" ) & " del MRR · meta ≤ 25 %"
+		displayFolder: 5. Alertas
+		lineageTag: 25d242b6-eb87-5804-a61d-df689e515e70
+
+	/// Contexto de la tarjeta de tasa de churn.
+	measure 'Nota Churn' = "Meta ≤ 22 % · " & FORMAT ( [Clientes Churn], "#,0" ) & " clientes"
+		displayFolder: 5. Alertas
+		lineageTag: c32bf1a9-1296-5d2f-abba-a348cc11d111
+
+	/// Contexto de la tarjeta de churn temprano.
+	measure 'Nota Churn Temprano' = "Meta ≤ 45 % · 49–72 m: " & FORMAT ( CALCULATE ( [Tasa Churn], dim_antiguedad[banda_antiguedad] = "49–72 m" ), "0.0%" )
+		displayFolder: 5. Alertas
+		lineageTag: 0af1dd9e-64c8-5db0-ad1b-e8a5bea94c79
+
+	/// Contexto de la tarjeta de contratos a plazo.
+	measure 'Nota Plazo' = "Meta ≥ 50 % · palanca L1"
+		displayFolder: 5. Alertas
+		lineageTag: 02fcebc3-26f2-5aa5-83ed-7ce3d4c7306c
+
+	/// Contexto de la tarjeta de ARPU.
+	measure 'Nota ARPU' = "Guardrail: no caer más de 3 %"
+		displayFolder: 5. Alertas
+		lineageTag: c463e6ec-f8d5-5a77-933e-d1751c9a5f22
+
+	/// Naranja si el grupo supera la tasa de churn de la selección; gris en otro caso.
+	measure 'Color Barra Churn' = IF ( [Tasa Churn] > CALCULATE ( [Tasa Churn], ALLSELECTED () ), "#eb6834", "#a9b6c6" )
+		displayFolder: 5. Alertas
+		lineageTag: 7bfef078-f725-5db5-acdc-a56c226dd26f
+
+	/// Naranja si el factor aumenta el riesgo (OR ≥ 1); azul si lo reduce.
+	measure 'Color Odds Ratio' = IF ( [Odds Ratio] >= 1, "#eb6834", "#2a78d6" )
+		displayFolder: 5. Alertas
+		lineageTag: 5426956d-6a60-543f-a4cb-63cfeb2984fd
 
 	/// Escenario elegido en el segmentador (Base por defecto).
 	measure 'Escenario Seleccionado' = SELECTEDVALUE ( dim_escenario[escenario], "Base" )
@@ -310,6 +389,12 @@ table Medidas
 		displayFolder: 6. Simulador del programa
 		lineageTag: 2581ae74-914d-5b77-b951-2c1a3a4a1f0d
 
+	/// Costo por cliente salvado del programa focalizado (guardrail: < USD 200).
+	measure 'Costo Salvado Focalizado' = CALCULATE ( [Costo por Cliente Salvado], fact_clientes[riesgo] = "Alto" )
+		formatString: \$#,0
+		displayFolder: 6. Simulador del programa
+		lineageTag: 34adba19-a4b3-576c-a7a3-d628d39422fc
+
 	/// Regla de decisión según el ROI focalizado del escenario.
 	measure 'Decisión Sugerida' =
 			VAR roi = [ROI Focalizado Riesgo Alto]
@@ -322,6 +407,331 @@ table Medidas
 			    )
 		displayFolder: 6. Simulador del programa
 		lineageTag: 62e2bb23-f88e-5a93-9d6c-0c7a693107f2
+
+	/// Verde si el ROI focalizado es ≥ 0.
+	measure 'Color ROI Focalizado' = IF ( [ROI Focalizado Riesgo Alto] >= 0, "#138a3f", "#c8312f" )
+		displayFolder: 6. Simulador del programa
+		lineageTag: 234da65a-4ad7-5976-9d33-7dd5e46e3579
+
+	/// Verde si el costo por cliente salvado es < USD 200.
+	measure 'Color Costo Salvado' = IF ( [Costo Salvado Focalizado] < 200, "#138a3f", "#c8312f" )
+		displayFolder: 6. Simulador del programa
+		lineageTag: cb7ea1e9-cfd4-55dd-91d9-b779941d9f6c
+
+	/// Contexto de la tarjeta de clientes de riesgo alto.
+	measure 'Nota Riesgo Alto' = FORMAT ( DIVIDE ( [Clientes Riesgo Alto], [Clientes Activos] ), "0%" ) & " de los clientes activos"
+		displayFolder: 6. Simulador del programa
+		lineageTag: 340508e1-3002-5677-bfef-880bc7016bb4
+
+	/// Contexto de la tarjeta de MRR de riesgo alto.
+	measure 'Nota MRR Riesgo Alto' = FORMAT ( DIVIDE ( [MRR Riesgo Alto], [MRR Activo] ), "0%" ) & " del MRR activo"
+		displayFolder: 6. Simulador del programa
+		lineageTag: 60d9d7be-4476-563f-8196-df0ca09c2f6f
+
+	/// Concentración del MRR en riesgo esperado en el nivel alto.
+	measure 'Nota MRR Riesgo Esperado' = FORMAT ( DIVIDE ( CALCULATE ( [MRR en Riesgo Esperado], fact_clientes[riesgo] = "Alto" ), [MRR en Riesgo Esperado] ), "0%" ) & " está en riesgo alto"
+		displayFolder: 6. Simulador del programa
+		lineageTag: 4bd5a407-da0a-5e2e-826a-d51bc7bb01e5
+
+	/// Comparación del ROI focalizado con el ROI sin focalizar.
+	measure 'Nota ROI Focalizado' = "Sin focalizar: " & FORMAT ( [ROI Sin Focalizar], "+0%;-0%;0%" ) & " · escenario " & [Escenario Seleccionado]
+		displayFolder: 6. Simulador del programa
+		lineageTag: 05b97bbd-042c-5b93-839d-904e6a5bb350
+
+	/// Contexto de la tarjeta de costo por cliente salvado.
+	measure 'Nota Costo Salvado' = "Meta < USD 200 por cliente"
+		displayFolder: 6. Simulador del programa
+		lineageTag: a389af45-25a3-541c-af4a-95b06bfb1111
+
+	/// Alternativa elegida (C1 = programa focalizado, por defecto).
+	measure 'Alternativa Seleccionada' = SELECTEDVALUE ( dim_alternativa[alternativa_id], "C1" )
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 3aec7a99-18c5-5aec-8a24-8de33ed8f945
+
+	/// Nombre de la alternativa elegida.
+	measure 'Nombre Alternativa' = SELECTEDVALUE ( dim_alternativa[alternativa], "C · Focalizado (riesgo alto)" )
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: dd6a3abb-7040-5049-b634-5e7dbd432b3b
+
+	/// Reducción atribuible elegida en el parámetro; en blanco se usa la del escenario.
+	measure 'Reducción Simulada' = SELECTEDVALUE ( sim_reduccion[reduccion] )
+		formatString: 0%
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 0b954ed4-8920-515a-b36a-4cd5f7fe157e
+
+	/// Horizonte elegido en el parámetro; en blanco se usa el del escenario.
+	measure 'Horizonte Simulado' = SELECTEDVALUE ( sim_horizonte[horizonte_meses] )
+		formatString: 0
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 98a6bd33-35e9-5736-8549-2e58fa9a29b5
+
+	/// Clientes activos que recibe la alternativa elegida.
+	measure 'Sim Clientes' =
+			VAR alt = [Alternativa Seleccionada]
+			RETURN
+			    COUNTROWS ( FILTER (
+			        fact_clientes,
+			        fact_clientes[churn] = 0
+			            && SWITCH (
+			                alt,
+			                "B", fact_clientes[contrato] = "Mes a mes",
+			                "C0", NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ),
+			                NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) && fact_clientes[riesgo] = "Alto"
+			            )
+			    ) )
+		formatString: #,0
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 239b646b-6370-57e3-bc77-20ed72c7dbbc
+
+	/// Clientes que se espera salvar por corte con la alternativa y los supuestos elegidos.
+	measure 'Sim Clientes Salvados' =
+			VAR esc = [Escenario Seleccionado]
+			VAR alt = [Alternativa Seleccionada]
+			VAR rSel = [Reducción Simulada]
+			VAR hSel = [Horizonte Simulado]
+			RETURN
+			    SUMX (
+			        FILTER (
+			        fact_clientes,
+			        fact_clientes[churn] = 0
+			            && SWITCH (
+			                alt,
+			                "B", fact_clientes[contrato] = "Mes a mes",
+			                "C0", NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ),
+			                NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) && fact_clientes[riesgo] = "Alto"
+			            )
+			    ),
+			        VAR pal = IF ( alt = "B", "L1", fact_clientes[palanca_id] )
+			        VAR acc = LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR red = IF ( ISBLANK ( rSel ), LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), rSel )
+			        VAR mar = LOOKUPVALUE ( supuestos_escenario[margen], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR hor = IF ( ISBLANK ( hSel ), LOOKUPVALUE ( supuestos_escenario[horizonte_meses], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), hSel )
+			        VAR con = LOOKUPVALUE ( supuestos_escenario[costo_contacto], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR fij = LOOKUPVALUE ( supuestos_escenario[incentivo_fijo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR var_ = LOOKUPVALUE ( supuestos_escenario[incentivo_pct_cargo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        RETURN
+			            fact_clientes[prob_churn] * acc * red
+			    )
+		formatString: #,0.0
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 8f26ed3a-e234-5dd6-ac9b-1a010b9c7d73
+
+	/// MRR mensual que se espera conservar.
+	measure 'Sim MRR Salvado' =
+			VAR esc = [Escenario Seleccionado]
+			VAR alt = [Alternativa Seleccionada]
+			VAR rSel = [Reducción Simulada]
+			VAR hSel = [Horizonte Simulado]
+			RETURN
+			    SUMX (
+			        FILTER (
+			        fact_clientes,
+			        fact_clientes[churn] = 0
+			            && SWITCH (
+			                alt,
+			                "B", fact_clientes[contrato] = "Mes a mes",
+			                "C0", NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ),
+			                NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) && fact_clientes[riesgo] = "Alto"
+			            )
+			    ),
+			        VAR pal = IF ( alt = "B", "L1", fact_clientes[palanca_id] )
+			        VAR acc = LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR red = IF ( ISBLANK ( rSel ), LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), rSel )
+			        VAR mar = LOOKUPVALUE ( supuestos_escenario[margen], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR hor = IF ( ISBLANK ( hSel ), LOOKUPVALUE ( supuestos_escenario[horizonte_meses], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), hSel )
+			        VAR con = LOOKUPVALUE ( supuestos_escenario[costo_contacto], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR fij = LOOKUPVALUE ( supuestos_escenario[incentivo_fijo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR var_ = LOOKUPVALUE ( supuestos_escenario[incentivo_pct_cargo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        RETURN
+			            fact_clientes[prob_churn] * fact_clientes[cargo_mensual] * acc * red
+			    )
+		formatString: \$#,0
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 9bccbc26-352c-5129-b1e9-f5daf8f7c0db
+
+	/// MRR salvado × margen × horizonte.
+	measure 'Sim Contribución' =
+			VAR esc = [Escenario Seleccionado]
+			VAR alt = [Alternativa Seleccionada]
+			VAR rSel = [Reducción Simulada]
+			VAR hSel = [Horizonte Simulado]
+			RETURN
+			    SUMX (
+			        FILTER (
+			        fact_clientes,
+			        fact_clientes[churn] = 0
+			            && SWITCH (
+			                alt,
+			                "B", fact_clientes[contrato] = "Mes a mes",
+			                "C0", NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ),
+			                NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) && fact_clientes[riesgo] = "Alto"
+			            )
+			    ),
+			        VAR pal = IF ( alt = "B", "L1", fact_clientes[palanca_id] )
+			        VAR acc = LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR red = IF ( ISBLANK ( rSel ), LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), rSel )
+			        VAR mar = LOOKUPVALUE ( supuestos_escenario[margen], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR hor = IF ( ISBLANK ( hSel ), LOOKUPVALUE ( supuestos_escenario[horizonte_meses], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), hSel )
+			        VAR con = LOOKUPVALUE ( supuestos_escenario[costo_contacto], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR fij = LOOKUPVALUE ( supuestos_escenario[incentivo_fijo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR var_ = LOOKUPVALUE ( supuestos_escenario[incentivo_pct_cargo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        RETURN
+			            fact_clientes[prob_churn] * fact_clientes[cargo_mensual] * acc * red * mar * hor
+			    )
+		formatString: \$#,0
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: e8c0df61-96c2-5e89-9638-149c20aed913
+
+	/// Costo de contacto + aceptación × incentivo.
+	measure 'Sim Costo' =
+			VAR esc = [Escenario Seleccionado]
+			VAR alt = [Alternativa Seleccionada]
+			VAR rSel = [Reducción Simulada]
+			VAR hSel = [Horizonte Simulado]
+			RETURN
+			    SUMX (
+			        FILTER (
+			        fact_clientes,
+			        fact_clientes[churn] = 0
+			            && SWITCH (
+			                alt,
+			                "B", fact_clientes[contrato] = "Mes a mes",
+			                "C0", NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ),
+			                NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) && fact_clientes[riesgo] = "Alto"
+			            )
+			    ),
+			        VAR pal = IF ( alt = "B", "L1", fact_clientes[palanca_id] )
+			        VAR acc = LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR red = IF ( ISBLANK ( rSel ), LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), rSel )
+			        VAR mar = LOOKUPVALUE ( supuestos_escenario[margen], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR hor = IF ( ISBLANK ( hSel ), LOOKUPVALUE ( supuestos_escenario[horizonte_meses], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), hSel )
+			        VAR con = LOOKUPVALUE ( supuestos_escenario[costo_contacto], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR fij = LOOKUPVALUE ( supuestos_escenario[incentivo_fijo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        VAR var_ = LOOKUPVALUE ( supuestos_escenario[incentivo_pct_cargo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			        RETURN
+			            con + acc * ( fij + var_ * fact_clientes[cargo_mensual] )
+			    )
+		formatString: \$#,0
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 1d752493-0b79-5aca-8a58-655ec60274df
+
+	/// ROI de la alternativa con los supuestos elegidos.
+	measure 'Sim ROI' = DIVIDE ( [Sim Contribución] - [Sim Costo], [Sim Costo] )
+		formatString: +0%;-0%;0%
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: aa547ce2-862c-5475-a77d-526fd781d416
+
+	/// Contribución − costo (USD).
+	measure 'Sim Resultado Neto' = [Sim Contribución] - [Sim Costo]
+		formatString: \$#,0;-\$#,0
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 1f913882-d8c6-5e79-8ff7-28c85aa884fc
+
+	/// Costo por cliente salvado.
+	measure 'Sim Costo por Salvado' = DIVIDE ( [Sim Costo], [Sim Clientes Salvados] )
+		formatString: \$#,0
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: dadb1c9e-fd8c-5954-89ad-945cb9cdc5e3
+
+	/// Reducción atribuible mínima para que la alternativa no pierda dinero (ROI = 0).
+	measure 'Reducción de Equilibrio' =
+			VAR k =
+			    VAR esc = [Escenario Seleccionado]
+			    VAR alt = [Alternativa Seleccionada]
+			    VAR rSel = BLANK ()
+			    VAR hSel = [Horizonte Simulado]
+			    RETURN
+			        SUMX (
+			            FILTER (
+			            fact_clientes,
+			            fact_clientes[churn] = 0
+			                && SWITCH (
+			                    alt,
+			                    "B", fact_clientes[contrato] = "Mes a mes",
+			                    "C0", NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ),
+			                    NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) && fact_clientes[riesgo] = "Alto"
+			                )
+			        ),
+			            VAR pal = IF ( alt = "B", "L1", fact_clientes[palanca_id] )
+			            VAR acc = LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            VAR red = IF ( ISBLANK ( rSel ), LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), rSel )
+			            VAR mar = LOOKUPVALUE ( supuestos_escenario[margen], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            VAR hor = IF ( ISBLANK ( hSel ), LOOKUPVALUE ( supuestos_escenario[horizonte_meses], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), hSel )
+			            VAR con = LOOKUPVALUE ( supuestos_escenario[costo_contacto], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            VAR fij = LOOKUPVALUE ( supuestos_escenario[incentivo_fijo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            VAR var_ = LOOKUPVALUE ( supuestos_escenario[incentivo_pct_cargo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            RETURN
+			                fact_clientes[prob_churn] * fact_clientes[cargo_mensual] * acc * mar * hor
+			        )
+			RETURN
+			    DIVIDE ( [Sim Costo], k )
+		formatString: 0.0%
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: b468eb9f-2516-5be7-af0c-be84abb195a4
+
+	/// ROI de la alternativa para cada valor del eje de reducción atribuible.
+	measure 'ROI Curva' =
+			VAR contribucion =
+			    VAR esc = [Escenario Seleccionado]
+			    VAR alt = [Alternativa Seleccionada]
+			    VAR rSel = MAX ( eje_reduccion[reduccion_eje] )
+			    VAR hSel = [Horizonte Simulado]
+			    RETURN
+			        SUMX (
+			            FILTER (
+			            fact_clientes,
+			            fact_clientes[churn] = 0
+			                && SWITCH (
+			                    alt,
+			                    "B", fact_clientes[contrato] = "Mes a mes",
+			                    "C0", NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ),
+			                    NOT ( fact_clientes[palanca_id] IN { "L0", "NA" } ) && fact_clientes[riesgo] = "Alto"
+			                )
+			        ),
+			            VAR pal = IF ( alt = "B", "L1", fact_clientes[palanca_id] )
+			            VAR acc = LOOKUPVALUE ( supuestos_escenario[aceptacion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            VAR red = IF ( ISBLANK ( rSel ), LOOKUPVALUE ( supuestos_escenario[reduccion], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), rSel )
+			            VAR mar = LOOKUPVALUE ( supuestos_escenario[margen], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            VAR hor = IF ( ISBLANK ( hSel ), LOOKUPVALUE ( supuestos_escenario[horizonte_meses], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal ), hSel )
+			            VAR con = LOOKUPVALUE ( supuestos_escenario[costo_contacto], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            VAR fij = LOOKUPVALUE ( supuestos_escenario[incentivo_fijo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            VAR var_ = LOOKUPVALUE ( supuestos_escenario[incentivo_pct_cargo], supuestos_escenario[escenario], esc, supuestos_escenario[palanca_id], pal )
+			            RETURN
+			                fact_clientes[prob_churn] * fact_clientes[cargo_mensual] * acc * red * mar * hor
+			        )
+			RETURN
+			    DIVIDE ( contribucion - [Sim Costo], [Sim Costo] )
+		formatString: +0%;-0%;0%
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 66a7ac00-f48e-578f-a89c-c4c5fad8588c
+
+	/// Línea de equilibrio (ROI = 0).
+	measure 'ROI Cero' = 0
+		formatString: 0%
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: 36804a16-5722-54cb-8967-c4dad4bbeccf
+
+	/// Verde si el ROI simulado es ≥ 0.
+	measure 'Color ROI Simulado' = IF ( [Sim ROI] >= 0, "#138a3f", "#c8312f" )
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: bc96363f-b692-52b6-b99c-864b9b1ba497
+
+	/// Lectura breve del ROI simulado.
+	measure 'Nota Sim ROI' = IF ( [Sim ROI] >= 0, "Rentable con estos supuestos", "Pierde dinero con estos supuestos" )
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: a443dedc-0bf9-55bd-a12d-76c2a2cc2ee0
+
+	/// Lectura automática del resultado del simulador.
+	measure 'Lectura Simulador' =
+			VAR roi = [Sim ROI]
+			RETURN
+			    [Nombre Alternativa] & " · escenario " & [Escenario Seleccionado] & ": se intervienen "
+			        & FORMAT ( [Sim Clientes], "#,0" ) & " clientes, se salvan " & FORMAT ( [Sim Clientes Salvados], "0.0" )
+			        & " por corte y el ROI es " & FORMAT ( roi, "+0%;-0%;0%" ) & ". "
+			        & IF ( roi >= 0, "Resultado positivo: candidato a piloto con grupo control. ", "Resultado negativo: no ejecutar con estos supuestos. " )
+			        & "Para no perder dinero, la reducción atribuible debe superar " & FORMAT ( [Reducción de Equilibrio], "0.0%" ) & "."
+		displayFolder: 7. Simulador qué pasaría si
+		lineageTag: c6ce240e-049d-5367-b92a-68b22059086d
 
 	column Orden
 		dataType: int64

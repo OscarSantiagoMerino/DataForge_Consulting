@@ -3,11 +3,11 @@
   "name": "tabla_segmentos",
   "position": {
     "x": 16,
-    "y": 166,
-    "z": 7000,
-    "width": 790,
-    "height": 300,
-    "tabOrder": 7000
+    "y": 198,
+    "z": 22000,
+    "width": 900,
+    "height": 292,
+    "tabOrder": 22000
   },
   "visual": {
     "visualType": "tableEx",
@@ -16,21 +16,6 @@
       "queryState": {
         "Values": {
           "projections": [
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_segmento"
-                    }
-                  },
-                  "Property": "segmento_id"
-                }
-              },
-              "queryRef": "dim_segmento.segmento_id",
-              "nativeQueryRef": "segmento_id",
-              "displayName": "ID"
-            },
             {
               "field": {
                 "Column": {
@@ -89,7 +74,7 @@
               },
               "queryRef": "Medidas.Tasa Churn",
               "nativeQueryRef": "Tasa Churn",
-              "displayName": "Churn del corte"
+              "displayName": "Churn"
             },
             {
               "field": {
@@ -104,7 +89,7 @@
               },
               "queryRef": "Medidas.MRR en Riesgo Esperado",
               "nativeQueryRef": "MRR en Riesgo Esperado",
-              "displayName": "MRR en riesgo esperado"
+              "displayName": "MRR en riesgo"
             },
             {
               "field": {
@@ -120,21 +105,6 @@
               "queryRef": "dim_segmento.palanca",
               "nativeQueryRef": "palanca",
               "displayName": "Palanca dominante"
-            },
-            {
-              "field": {
-                "Column": {
-                  "Expression": {
-                    "SourceRef": {
-                      "Entity": "dim_segmento"
-                    }
-                  },
-                  "Property": "responsable"
-                }
-              },
-              "queryRef": "dim_segmento.responsable",
-              "nativeQueryRef": "responsable",
-              "displayName": "Responsable"
             }
           ]
         }
@@ -189,7 +159,7 @@
                           "max": {
                             "color": {
                               "Literal": {
-                                "Value": "'#ec835a'"
+                                "Value": "'#f0a07f'"
                               }
                             }
                           },
@@ -217,6 +187,168 @@
               }
             ],
             "metadata": "Medidas.Tasa Churn"
+          }
+        },
+        {
+          "properties": {
+            "dataBars": {
+              "positiveColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#2a78d6'"
+                      }
+                    }
+                  }
+                }
+              },
+              "negativeColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#c8312f'"
+                      }
+                    }
+                  }
+                }
+              },
+              "axisColor": {
+                "solid": {
+                  "color": {
+                    "expr": {
+                      "Literal": {
+                        "Value": "'#5b6573'"
+                      }
+                    }
+                  }
+                }
+              },
+              "reverseDirection": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "hideText": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas.MRR en Riesgo Esperado"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "296D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_segmento.segmento"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "140D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_segmento.prioridad"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "62D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas.Clientes Activos"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "70D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas.Tasa Churn"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "130D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas.MRR en Riesgo Esperado"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "160D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dim_segmento.palanca"
           }
         }
       ]
@@ -268,7 +400,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#e1e0d9'"
+                      "Value": "'#dde3ea'"
                     }
                   }
                 }
@@ -277,7 +409,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "10D"
                 }
               }
             }
@@ -303,28 +435,41 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "8D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "8D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "12D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -344,7 +489,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'Priorización de segmentos: P1 combina churn ≥ 40 % y ≥ 5 % del MRR en riesgo (ordenado por MRR en riesgo esperado)'"
+                  "Value": "'¿A quién intervenir? Priorización de segmentos por riesgo y valor'"
                 }
               }
             },
@@ -358,7 +503,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "12D"
                 }
               }
             },
@@ -367,7 +512,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0b0b0b'"
+                      "Value": "'#1b1f24'"
                     }
                   }
                 }
@@ -377,6 +522,58 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'P1 = churn ≥ 40 % y ≥ 5 % del MRR en riesgo · ordenado por MRR en riesgo esperado · barras = USD en riesgo'"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5b6573'"
+                    }
+                  }
                 }
               }
             }

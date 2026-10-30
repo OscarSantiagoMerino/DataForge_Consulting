@@ -1,0 +1,271 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.3.0/schema.json",
+  "name": "notas",
+  "position": {
+    "x": 664,
+    "y": 474,
+    "z": 8000,
+    "width": 600,
+    "height": 238,
+    "tabOrder": 8000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "drillFilterOtherVisuals": true,
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Notas de interpretación",
+                    "textStyle": {
+                      "fontSize": "11pt",
+                      "color": "#1b1f24",
+                      "fontWeight": "bold",
+                      "fontFamily": "Segoe UI Semibold"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Granularidad. ",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#13294b",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Una fila por cliente en el corte; los clientes se cuentan con DISTINCTCOUNT y las tasas son razones de sumas.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#1b1f24"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Ventana. ",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#13294b",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "El churn es del período de corte y está sobrerrepresentado en el dataset de IBM: se comparan segmentos y no se anualiza.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#1b1f24"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Score de riesgo. ",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#13294b",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Modelo logístico validado fuera de muestra (AUC 0.85); sirve para ordenar, no como pronóstico exacto.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#1b1f24"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Causalidad. ",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#13294b",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Las diferencias entre segmentos son asociaciones; el efecto real de cada palanca se medirá con el piloto A/B.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#1b1f24"
+                    }
+                  }
+                ]
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Actualización. ",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#13294b",
+                      "fontWeight": "bold"
+                    }
+                  },
+                  {
+                    "value": "Reemplazar los CSV de powerbi/data y pulsar Actualizar; si la carpeta cambia, editar el parámetro RutaDatos.",
+                    "textStyle": {
+                      "fontSize": "9pt",
+                      "color": "#1b1f24"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#ffffff'"
+                    }
+                  }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "border": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "color": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#dde3ea'"
+                    }
+                  }
+                }
+              }
+            },
+            "radius": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dropShadow": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "padding": [
+        {
+          "properties": {
+            "top": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "bottom": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            },
+            "left": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            },
+            "right": {
+              "expr": {
+                "Literal": {
+                  "Value": "14D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -3,11 +3,11 @@
   "name": "linea_ciclo_vida",
   "position": {
     "x": 16,
-    "y": 166,
-    "z": 7000,
-    "width": 760,
-    "height": 300,
-    "tabOrder": 7000
+    "y": 198,
+    "z": 24000,
+    "width": 612,
+    "height": 290,
+    "tabOrder": 24000
   },
   "visual": {
     "visualType": "lineChart",
@@ -49,6 +49,21 @@
               "queryRef": "Medidas.Tasa Churn",
               "nativeQueryRef": "Tasa Churn",
               "displayName": "Tasa de churn"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Medidas"
+                    }
+                  },
+                  "Property": "Promedio Churn Corte"
+                }
+              },
+              "queryRef": "Medidas.Promedio Churn Corte",
+              "nativeQueryRef": "Promedio Churn Corte",
+              "displayName": "Promedio del corte"
             }
           ]
         }
@@ -69,6 +84,27 @@
                 }
               }
             }
+          },
+          "selector": {
+            "metadata": "Medidas.Tasa Churn"
+          }
+        },
+        {
+          "properties": {
+            "fill": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#8e99a8'"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas.Promedio Churn Corte"
           }
         }
       ],
@@ -78,10 +114,34 @@
             "strokeWidth": {
               "expr": {
                 "Literal": {
-                  "Value": "2D"
+                  "Value": "3D"
                 }
               }
             }
+          },
+          "selector": {
+            "metadata": "Medidas.Tasa Churn"
+          }
+        },
+        {
+          "properties": {
+            "strokeWidth": {
+              "expr": {
+                "Literal": {
+                  "Value": "2D"
+                }
+              }
+            },
+            "lineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "'dashed'"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "Medidas.Promedio Churn Corte"
           }
         }
       ],
@@ -101,6 +161,24 @@
                   "Value": "true"
                 }
               }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5b6573'"
+                    }
+                  }
+                }
+              }
             }
           }
         }
@@ -112,6 +190,62 @@
               "expr": {
                 "Literal": {
                   "Value": "false"
+                }
+              }
+            },
+            "showAxisTitle": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            },
+            "labelColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5b6573'"
+                    }
+                  }
+                }
+              }
+            },
+            "gridlineColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#edf0f3'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "legend": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "position": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Top'"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
                 }
               }
             }
@@ -166,7 +300,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#e1e0d9'"
+                      "Value": "'#dde3ea'"
                     }
                   }
                 }
@@ -175,7 +309,7 @@
             "radius": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "10D"
                 }
               }
             }
@@ -201,28 +335,41 @@
             "top": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "8D"
                 }
               }
             },
             "bottom": {
               "expr": {
                 "Literal": {
-                  "Value": "6D"
+                  "Value": "8D"
                 }
               }
             },
             "left": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "12D"
                 }
               }
             },
             "right": {
               "expr": {
                 "Literal": {
-                  "Value": "8D"
+                  "Value": "12D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "visualHeader": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
                 }
               }
             }
@@ -242,7 +389,7 @@
             "text": {
               "expr": {
                 "Literal": {
-                  "Value": "'El churn se concentra en los primeros meses de vida del cliente (tasa de churn por mes de antigüedad)'"
+                  "Value": "'El riesgo de abandono se concentra en los primeros meses de la relación'"
                 }
               }
             },
@@ -256,7 +403,7 @@
             "fontSize": {
               "expr": {
                 "Literal": {
-                  "Value": "11D"
+                  "Value": "12D"
                 }
               }
             },
@@ -265,7 +412,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#0b0b0b'"
+                      "Value": "'#1b1f24'"
                     }
                   }
                 }
@@ -275,6 +422,58 @@
               "expr": {
                 "Literal": {
                   "Value": "true"
+                }
+              }
+            },
+            "fontFamily": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Segoe UI Semibold'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "subTitle": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Tasa de churn por mes de antigüedad (línea azul) frente al promedio de la selección (línea gris)'"
+                }
+              }
+            },
+            "titleWrap": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "9D"
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#5b6573'"
+                    }
+                  }
                 }
               }
             }

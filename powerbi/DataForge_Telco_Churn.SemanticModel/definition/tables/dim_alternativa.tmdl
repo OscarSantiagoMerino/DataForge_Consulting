@@ -1,0 +1,37 @@
+/// Alternativas de decisión evaluadas en el simulador (tabla desconectada).
+table dim_alternativa
+	lineageTag: bcf1159a-f308-5980-a749-395dfe6a51df
+
+	column alternativa_id
+		dataType: string
+		lineageTag: 9dd0c4fd-4732-560d-ab03-1e223e345450
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [alternativa_id]
+
+		annotation SummarizationSetBy = User
+
+	column alternativa
+		dataType: string
+		lineageTag: c9281687-a85b-5968-a422-1892e1ee66a4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [alternativa]
+		sortByColumn: orden
+
+		annotation SummarizationSetBy = User
+
+	column orden
+		dataType: int64
+		formatString: 0
+		isHidden
+		lineageTag: 258069eb-41ec-5eca-909e-5b7c05a6ab75
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [orden]
+
+		annotation SummarizationSetBy = User
+
+	partition dim_alternativa = calculated
+		mode: import
+		source = DATATABLE ( "alternativa_id", STRING, "alternativa", STRING, "orden", INTEGER, { { "B", "B · Descuento masivo", 1 }, { "C0", "C · Sin focalizar", 2 }, { "C1", "C · Focalizado (riesgo alto)", 3 } } )

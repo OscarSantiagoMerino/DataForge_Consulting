@@ -1,5 +1,5 @@
 model Model
-	culture: en-US
+	culture: es-CO
 	defaultPowerBIDataSourceVersion: powerBI_V3
 	discourageImplicitMeasures
 	sourceQueryCulture: en-US
@@ -25,3 +25,7 @@ ref table supuestos_escenario
 ref table drivers_modelo
 ref table dim_metricas
 ref table plan_monitoreo
+ref table dim_alternativa
+ref table sim_reduccion
+ref table sim_horizonte
+ref table eje_reduccion

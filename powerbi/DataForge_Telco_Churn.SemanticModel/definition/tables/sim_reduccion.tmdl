@@ -1,0 +1,17 @@
+/// Parámetro qué pasaría si: reducción atribuible del riesgo entre quienes aceptan (igual para todas las palancas).
+table sim_reduccion
+	lineageTag: 1ac6e449-dde2-546f-892a-54516d985610
+
+	column reduccion
+		dataType: double
+		formatString: 0%
+		lineageTag: 2e7d9c20-1375-5438-814b-dfc90402d07c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [reduccion]
+
+		annotation SummarizationSetBy = User
+
+	partition sim_reduccion = calculated
+		mode: import
+		source = SELECTCOLUMNS ( GENERATESERIES ( 0, 40, 1 ), "reduccion", [Value] / 100 )

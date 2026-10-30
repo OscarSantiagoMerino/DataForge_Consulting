@@ -20,11 +20,11 @@ Proyecto final de *Decision Intelligence & Business Analytics*, Escuela Colombia
 
 | # | Entregable | Ubicación |
 |---|---|---|
-| 1 | Informe final en PDF (14 páginas de cuerpo + anexos) | [`informe/informe_final.pdf`](informe/informe_final.pdf) (fuente LaTeX: `informe/informe_final.tex`) |
+| 1 | Informe final en PDF (18 páginas de cuerpo + anexos; incluye el diccionario en el Anexo A) | [`informe/informe_final.pdf`](informe/informe_final.pdf) |
 | 2 | Notebook reproducible (de la carga a los análisis) | [`notebooks/DataForge_Telco_Churn.ipynb`](notebooks/DataForge_Telco_Churn.ipynb) |
-| 3 | Dashboard en Power BI (proyecto PBIP, 4 páginas, 39 medidas DAX) | [`powerbi/DataForge_Telco_Churn.pbip`](powerbi/DataForge_Telco_Churn.pbip) · capturas en `outputs/figuras/dashboard_p*.png` |
+| 3 | Dashboard en Power BI (proyecto PBIP, 5 páginas con simulador de escenarios, 76 medidas DAX) | [`powerbi/DataForge_Telco_Churn.pbip`](powerbi/DataForge_Telco_Churn.pbip) · capturas en `outputs/figuras/dashboard_p*.png` |
 | 4 | Diccionario de métricas (9 métricas críticas, Plantilla 2) | [`docs/diccionario_metricas.md`](docs/diccionario_metricas.md) |
-| 5 | Presentación ejecutiva (≤ 10 min, con notas del orador) | [`presentacion/DataForge_Presentacion_Ejecutiva.pptx`](presentacion/DataForge_Presentacion_Ejecutiva.pptx) |
+| 5 | Presentación ejecutiva (37 diapositivas, ≈ 27 min, repartida entre los 4 integrantes, con notas del orador) | [`presentacion/DataForge_Presentacion_Ejecutiva.pptx`](presentacion/DataForge_Presentacion_Ejecutiva.pptx) |
 | 6 | README con instrucciones | Este archivo |
 
 ## Estructura del repositorio
@@ -40,14 +40,14 @@ Proyecto final de *Decision Intelligence & Business Analytics*, Escuela Colombia
 │   ├── data/                     Modelo estrella en CSV (lo genera el notebook)
 │   ├── DataForge_Telco_Churn.pbip
 │   ├── DataForge_Telco_Churn.SemanticModel/   Modelo TMDL (tablas, relaciones, medidas)
-│   ├── DataForge_Telco_Churn.Report/          Reporte PBIR (4 páginas)
+│   ├── DataForge_Telco_Churn.Report/          Reporte PBIR (5 páginas)
 │   └── MEDIDAS_DAX.md            Documentación de las medidas
-├── informe/                      Informe LaTeX + PDF
+├── informe/                      Informe final en PDF
 ├── presentacion/                 Presentación ejecutiva
-└── docs/                         Diccionario de métricas y nota de uso de IA
+└── docs/                         Diccionario de métricas
 ```
 
-Las carpetas `Enunciado/` y `Documentos/` (material del curso) están excluidas del repositorio por `.gitignore`.
+Las carpetas `Enunciado/`, `Documentos/` y `Audio/` (material del curso) están excluidas del repositorio por `.gitignore`.
 
 ## Cómo reproducir el análisis
 
@@ -56,7 +56,7 @@ Las carpetas `Enunciado/` y `Documentos/` (material del curso) están excluidas 
 ```bash
 python -m venv .venv
 .venv\Scripts\activate            # Windows  (macOS/Linux: source .venv/bin/activate)
-pip install -r requirements.txt
+pip install pandas numpy matplotlib jinja2 jupyter
 jupyter notebook notebooks/DataForge_Telco_Churn.ipynb
 ```
 
@@ -71,15 +71,11 @@ Ejecute *Run All*. El notebook lee `Data/WA_Fn-UseC_-Telco-Customer-Churn.csv` y
 3. Si el repositorio está en una ruta distinta a `C:\Users\kimbo\Downloads\ProyectoFinalDIBA`, vaya a **Transformar datos → Editar parámetros**, cambie `RutaDatos` a la ruta de su carpeta `powerbi\data\` (con la barra final) y vuelva a actualizar.
 4. Para entregar un archivo único: **Archivo → Guardar como → tipo "Archivos de Power BI (\*.pbix)"**.
 
-Las páginas son: **1 · Resumen ejecutivo**, **2 · Diagnóstico**, **3 · Monitoreo y acción** (con un simulador de ROI por escenario) y **4 · Definiciones y supuestos**.
+Las páginas son: **1 · Vista ejecutiva**, **2 · Vista diagnóstica**, **3 · Monitoreo y acción** (priorización, ROI por escenario, regla de decisión y plan de monitoreo), **4 · Simulador de escenarios** («qué pasaría si»: alternativa, escenario, reducción atribuible, horizonte y segmento) y **5 · Definiciones y supuestos**. Los botones de la banda superior navegan entre páginas (en Power BI Desktop, Ctrl + clic). Los filtros de contrato, internet, pago y antigüedad están sincronizados entre las páginas 1 y 2.
 
-### 3. Informe (LaTeX)
+### 3. Presentación ejecutiva
 
-```bash
-cd informe
-python generar_anexos.py                 # regenera el anexo del diccionario desde powerbi/data/dim_metricas.csv
-pdflatex informe_final.tex               # ejecutar dos veces
-```
+`presentacion/DataForge_Presentacion_Ejecutiva.pptx` (y su versión en PDF) tiene 37 diapositivas para unos 27 minutos, repartidas así: Oscar Santiago Merino (1–8 y 34–37), Claudia Rocío Rodríguez (9–16), Paula Andrea Gacha (17–24) y Daniel Felipe Pérez (25–33). Las notas del orador de cada diapositiva indican quién la presenta, el tiempo sugerido y el guion.
 
 ## Fuente de datos
 
@@ -87,4 +83,4 @@ IBM, *Telco Customer Churn* (IBM Sample Data Sets), publicado en Kaggle por blas
 
 ## Uso de herramientas de IA
 
-Ver [`docs/nota_uso_ia.md`](docs/nota_uso_ia.md) (sección 13 del enunciado).
+Ver la sección «Nota sobre el uso de herramientas de IA» al final del [informe](informe/informe_final.pdf) (sección 13 del enunciado).

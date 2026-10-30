@@ -1,29 +1,20 @@
-# Material del curso (enunciado y documentos de la profesora): no se versiona
+# Material del curso (enunciado, documentos y audio de la profesora): no se versiona
 Enunciado/
 Documentos/
+Audio/
 
-# Entorno de Python
+# Entorno de Python y checkpoints de Jupyter
 .venv/
-__pycache__/
 .ipynb_checkpoints/
 
 # Power BI: caché de datos y configuración local de cada usuario
 **/.pbi/localSettings.json
 **/.pbi/cache.abf
 
-# LaTeX: archivos auxiliares de compilación
-informe/*.aux
-informe/*.log
-informe/*.out
-informe/*.toc
-informe/*.fls
-informe/*.fdb_latexmk
-informe/*.synctex.gz
+# Informe: solo se publica el PDF (fuente LaTeX y auxiliares quedan locales)
+informe/*
+!informe/informe_final.pdf
 
-# Sistema operativo
-Thumbs.db
-desktop.ini
-.DS_Store
-
-# Configuración local de Claude Code
-.claude/
+# Archivos locales que no se publican
+docs/nota_uso_ia.md
+requirements.txt

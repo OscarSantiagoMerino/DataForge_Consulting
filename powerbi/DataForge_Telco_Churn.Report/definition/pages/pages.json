@@ -4,7 +4,8 @@
     "p1_resumen",
     "p2_diagnostico",
     "p3_accion",
-    "p4_definiciones"
+    "p4_simulador",
+    "p5_definiciones"
   ],
   "activePageName": "p1_resumen"
 }
